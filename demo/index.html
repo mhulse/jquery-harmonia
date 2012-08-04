@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+	
+	<meta charset="utf-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"> <!-- Use this server side: h5bp.com/i/378 -->
+	
+	<title>Harmonia: The immortal goddess of harmony and concord.</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- rgne.ws/MOkRAX -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<!-- rgne.ws/MuCQZI -->
+	<script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');</script>
+	
+	<style>
+		<!--
+			
+			.js .myList { display: none; visibility: hidden; }
+			
+			@media only screen and (min-width: 1400px) {
+				
+				.ha-select { display: none; visibility: hidden; }
+				.js .myList { display: block; visibility: visible; }
+				
+			}
+			
+		-->
+	</style>
+	
+</head>
+<body>
+	
+	<ul class="myList">
+		<li><a href="http://en.wikipedia.org/wiki/Hebe_(mythology)">Hebe</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Hebe_(mythology)">Hedone</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Nike_(mythology)">Nike</a></li>
+		<li><a href="#">No link</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Angelos_(Greek_mythology)">Angelos</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Erinyes">Erinyes</a></li>
+		<li><a class="selected" href="http://en.wikipedia.org/wiki/Cronus">Cronus</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Ceto">Ceto</a></li>
+	</ul>
+	
+	<hr>
+	
+	<ul class="myList toDestroy">
+		<li><a href="http://en.wikipedia.org/wiki/Phorcys">Phorcys</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Triton_(mythology)">Triton</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Ouranos">Ouranos</a></li>
+		<li><a href="http://assets.registerguard.com/demos/grid/select/">Current page (absolute)</a></li>
+		<!--<li><a href="/demos/grid/select/">IBID (root relative)</a></li>-->
+		<li><a href="/demos/grid/select/?foo=bar">IBID (query string)</a></li>
+		<li><a href="index.html">IBID (relative)</a></li>
+		<!--<li><a href="index.html?foo=bar">IBID (query string)</a></li>-->
+	</ul>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="../harmonia/jquery.harmonia-0.1.0.js"></script>
+	
+	<script type="text/javascript">
+		<!--
+			
+			$(document).ready(function() {
+				
+				$('.myList').harmonia({
+					//openTab     : true,
+					currentPage : true
+				});
+				//$('.toDestroy').harmonia('destroy');
+				
+			});
+			
+		//-->
+	</script>
+	
+</body>
+</html>
