@@ -44,7 +44,6 @@
 	var constants = {
 		
 		NS     : 'harmonia',                                        // Namespace identifier.
-		PREFIX : 'ha',                                              // Class prefix.
 		C      : ((typeof(console) !== 'undefined') ? true : false) // Check if the javascript console is available.
 		
 	}, // constants
@@ -73,9 +72,9 @@
 				// Local variable(s):
 				//----------------------------------
 				
-				var $this = $(this),                                         // Target object.
-				data      = $this.data(constants.NS),                        // Namespace instance data.
-				options   = $.extend({}, $.fn[constants.NS].defaults, opts); // Merge defaults and options.
+				var $this = $(this),                                                            // Target object.
+				data      = $this.data(constants.NS),                                           // Namespace instance data.
+				options   = $.extend({}, settings.external, $.fn[constants.NS].defaults, opts); // Merge settings, defaults and options.
 				
 				//----------------------------------
 				// Initialize data:
@@ -133,6 +132,12 @@
 					if ($hrefs.length) {
 						
 						//----------------------------------
+						// Root menu CSS class:
+						//----------------------------------
+						
+						$this.addClass(settings.internal.initClass);
+						
+						//----------------------------------
 						// Default `<select>` `<option>`?
 						//----------------------------------
 						
@@ -188,7 +193,7 @@
 							// Callback:
 							//----------------------------------
 							
-							options.onChange.call($$); // @TODO: Is this the best spot for this?
+							options.onChange.call($this, $$); // @TODO: Is this the best spot for this?
 							
 							//----------------------------------
 							// Get link value:
@@ -288,6 +293,12 @@
 					//----------------------------------
 					
 					var options = data.options;
+					
+					//----------------------------------
+					// Remove root menu CSS class:
+					//----------------------------------
+					
+					$$.removeClass(settings.internal.initClass);
 					
 					//----------------------------------
 					// Remove generated HTML:
@@ -432,6 +443,12 @@
 		}
 		
 		//----------------------------------
+		// Callback:
+		//----------------------------------
+		
+		data.options.onAddOption.call(this, $return);
+		
+		//----------------------------------
 		// Return `<option>` or nothing:
 		//----------------------------------
 		
@@ -501,25 +518,59 @@
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * Default public settings.
+	 * Settings object.
 	 *
 	 * @type { object }
 	 */
 	
-	$.fn[constants.NS].defaults = {
+	var settings = {}; // Initialize config object.
+	
+	//----------------------------------
+	/**
+	 * Private settings.
+	 *
+	 * @type { object }
+	 */
+	
+	settings.internal = {
 		
-		currentPage   : false,                        // Select the current page?
-		defaultOption : 'Choose...',                  // Default option for `<select>`.
-		openTab       : false,                        // Open link in new tab? Default is current window.
-		selectClass   : constants.PREFIX + '-select', // Class name for `<select>`.
-		selectId      : false,                        // ID name for `<select>`.
+		initClass : constants.NS + '-js-enabled' // Target menu.
+		
+	}; // settings.internal
+	
+	//----------------------------------
+	
+	/**
+	 * Public settings.
+	 *
+	 * @type { object }
+	 */
+	
+	settings.external = {
+		
+		currentPage   : false,                    // Select the current page?
+		defaultOption : 'Choose...',              // Default option for `<select>`.
+		openTab       : false,                    // Open link in new tab? Default is current window.
+		selectClass   : constants.NS + '-select', // Class name for `<select>`.
+		selectId      : false,                    // ID name for `<select>`.
 		
 		// Callbacks:
 		
-		onInit         : function() {}, // After plugin data initialized.
-		onAfterInit    : function() {}, // After plugin initialization.
-		onChange       : function() {}  // Called when `<select>` changes.
+		onInit      : function() {}, // After plugin data initialized.
+		onAfterInit : function() {}, // After plugin initialization.
+		onAddOption : function() {}, // Called when a new option has been added.
+		onChange    : function() {}  // Called when `<select>` changes.
 		
-	}; // defaults
+	}; // settings.external
+	
+	//----------------------------------
+	
+	/**
+	 * Assign defaults to external.
+	 *
+	 * @type { object }
+	 */
+	
+	$.fn[constants.NS].defaults = settings.external; // rgne.ws/Mxifnq
 	
 })(jQuery);
