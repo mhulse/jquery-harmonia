@@ -1,0 +1,34 @@
+{
+  "title": "jQuery Harmonia",
+  "name": "harmonia",
+  "description": "A jQuery plugin to replace an (un)ordered list with a form select.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/registerguard/jquery-harmonia",
+  "main": "jquery.harmonia.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/registerguard/jquery-harmonia.git"
+  },
+  "author": {
+    "name": "Micky Hulse",
+    "url": "http://hulse.me"
+  },
+  "keywords": [
+    "html5",
+    "jquery",
+    "javascript"
+  ],
+  "licenses": [
+    {
+      "type": "Apache License, Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.0rc7",
+    "grunt-contrib-jshint": "0.1.1rc6",
+    "grunt-contrib-nodeunit": "0.1.2rc6",
+    "grunt-contrib-uglify": "0.1.1rc6"
+  }
+}
