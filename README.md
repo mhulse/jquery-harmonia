@@ -57,10 +57,10 @@ Use CSS media queries to show/hide the HTML list/form select(s) as necessary.
 
 **Callbacks:**
 
-`onInit`: After plugin data initialized.
-`onAfterInit`: After plugin initialization.
-`onAddOption`: Called when a new option has been added.
-`onChange`: Called when `<select>` changes.
+* `onInit`: After plugin data initialized.
+* `onAfterInit`: After plugin initialization.
+* `onAddOption`: Called when a new option has been added.
+* `onChange`: Called when `<select>` changes.
 
 ---
 
