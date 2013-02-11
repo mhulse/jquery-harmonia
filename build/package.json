@@ -1,7 +1,7 @@
 {
   "title": "jQuery Harmonia",
   "name": "harmonia",
-  "description": "A jQuery plugin to replace an (un)ordered list with a form select.",
+  "description": "Replace an (un)ordered list with a form select.",
   "version": "1.0.0",
   "homepage": "https://github.com/registerguard/jquery-harmonia",
   "main": "jquery.harmonia.js",

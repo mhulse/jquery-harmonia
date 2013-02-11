@@ -1,6 +1,6 @@
 # jQuery Harmonia
 
-### A jQuery plugin to replace an (un)ordered list with a form select.
+### Replace an (un)ordered list with a form select.
 
 ---
 

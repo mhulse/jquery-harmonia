@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 		
 		uglify: {
 			
-			my_target: {
+			target: {
 				
 				options: {
 					
@@ -103,7 +103,7 @@ module.exports = function(grunt) {
 				
 			}
 			
-		},
+		}
 		
 	});
 	
