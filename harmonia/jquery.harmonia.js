@@ -51,7 +51,7 @@
 		init : function(opts) {
 			
 			//----------------------------------
-			// Loop & return each "this":
+			// Loop & return each `this`:
 			//----------------------------------
 			
 			return this.each(function() {
@@ -60,11 +60,9 @@
 				// Local variable(s):
 				//----------------------------------
 				
-				var $this = $(this),                                                  // Target object.
-				data      = $this.data(NS),                                           // Namespace instance data.
-				options   = $.extend({}, settings.external, $.fn[NS].defaults, opts), // Merge settings, defaults and options.
-				$hrefs    = '',
-				$select   = '';
+				var $this   = $(this),                                                  // Target object.
+				    data    = $this.data(NS),                                           // Namespace instance data.
+				    options = $.extend({}, settings.external, $.fn[NS].defaults, opts); // Merge `settings`, `defaults` and `opts`.
 				
 				//----------------------------------
 				// Initialize data:
@@ -76,11 +74,11 @@
 					// Setup variables:
 					//----------------------------------
 					
-					$hrefs = $this.find('> li > a');
-					$select = $('<select>', { 'class' : options.selectClass });
+					var $hrefs  = $this.find('> li > a'),
+					    $select = $('<select>', { 'class' : options.selectClass });
 					
 					//----------------------------------
-					// Namespaced instance data:
+					// Namespaced instance `data`:
 					//----------------------------------
 					
 					$this.data(NS, {
@@ -93,7 +91,8 @@
 						select  : $select
 						
 					});
-					data = $this.data(NS); // Make it easy for the rest of init().
+					
+					data = $this.data(NS); // Make it easy for the rest of `init()`.
 					
 				}
 				
@@ -113,31 +112,31 @@
 					// Callback:
 					//----------------------------------
 					
-					options.onInit.call($this);
+					data.options.onInit.call(data.target);
 					
 					//----------------------------------
 					// Check for object(s):
 					//----------------------------------
 					
-					if ($hrefs.length) {
+					if (data.hrefs.length) {
 						
 						//----------------------------------
 						// Root menu CSS class:
 						//----------------------------------
 						
-						$this.addClass(settings.internal.initClass);
+						data.target.addClass(settings.internal.initClass);
 						
 						//----------------------------------
 						// Default `<select>` `<option>`?
 						//----------------------------------
 						
-						if (options.defaultOption) {
+						if (data.options.defaultOption) {
 							
 							//----------------------------------
 							// Get the `<option>`:
 							//----------------------------------
 							
-							var $default = optionize.call($this, $('<a />'), options.defaultOption);
+							var $default = optionize.call(data.target, $('<a />'), data.options.defaultOption);
 							
 							//----------------------------------
 							// Append `<option>` to `<select>`:
@@ -145,7 +144,7 @@
 							
 							if ($default.length) {
 								
-								$default.appendTo($select);
+								$default.appendTo(data.select);
 								
 							}
 							
@@ -155,13 +154,13 @@
 						// Create the other `<option>`s:
 						//----------------------------------
 						
-						$hrefs.each(function() {
+						data.hrefs.each(function() {
 							
 							//----------------------------------
 							// Get the `<option>`:
 							//----------------------------------
 							
-							var $option = optionize.call($this, $(this));
+							var $option = optionize.call(data.target, $(this));
 							
 							//----------------------------------
 							// Append `<option>` to `<select>`:
@@ -169,7 +168,7 @@
 							
 							if ($option.length) {
 								
-								$option.appendTo($select);
+								$option.appendTo(data.select);
 								
 							}
 							
@@ -179,7 +178,7 @@
 						// Add change event to `<select>`:
 						//----------------------------------
 						
-						$select.change(function() {
+						data.select.change(function() {
 							
 							//----------------------------------
 							// Local variable(s):
@@ -191,7 +190,7 @@
 							// Callback:
 							//----------------------------------
 							
-							options.onChange.call($this, $$); // @TODO: Is this the best spot for this?
+							data.options.onChange.call(data.target, $$); // @TODO: Is this the best spot for this?
 							
 							//----------------------------------
 							// Get link value:
@@ -209,13 +208,13 @@
 								// Ignore default `<select>`:
 								//----------------------------------
 								
-								if (val !== options.defaultOption) {
+								if (val !== data.options.defaultOption) {
 									
 									//----------------------------------
 									// Open tab or use current window:
 									//----------------------------------
 									
-									if (options.openTab) {
+									if (data.options.openTab) {
 										
 										window.open(val); // New tab.
 										
@@ -235,13 +234,13 @@
 						// Insert before target:
 						//----------------------------------
 						
-						.insertBefore($this);
+						.insertBefore(data.target);
 						
 						//----------------------------------
 						// Callback:
 						//----------------------------------
 						
-						options.onAfterInit.call($this);
+						data.options.onAfterInit.call(data.target);
 						
 					} else {
 						
@@ -285,8 +284,8 @@
 				// Local variable(s):
 				//----------------------------------
 				
-				var $$ = $(this),
-				data = $$.data(NS);
+				var $$   = $(this),
+				    data = $$.data(NS);
 				
 				//----------------------------------
 				// Data?
@@ -348,7 +347,7 @@
 		//----------------------------------
 		
 		var $return = '',
-		data = this.data(NS);
+		    data    = this.data(NS);
 		
 		if (data) {
 			
@@ -364,9 +363,9 @@
 				// Create `<option>` element:
 				//----------------------------------
 				
-				var $option = $('<option />'),
-				selected    = false,
-				uri         = ($a.attr('href') || ''); // Current `<a>`'s uri.
+				var $option  = $('<option />'),
+				    selected = false,
+				    uri      = ($a.attr('href') || ''); // Current `<a>`'s uri.
 				
 				//----------------------------------
 				// Something currently selected?
@@ -398,7 +397,7 @@
 							
 							if ((uri == href) || (href.indexOf(uri) > 0)) {
 								
-								selected = true; // Warning: indexOf() will pass if -1; need to explicitly check for "> 0"!
+								selected = true; // Warning: `indexOf()` will pass if `-1`; need to explicitly check for `> 0`!
 								
 							}
 							
@@ -554,11 +553,11 @@
 	
 	settings.external = {
 		
-		currentPage   : false,                    // Select the current page?
-		defaultOption : 'Choose...',              // Default option for `<select>`.
-		openTab       : false,                    // Open link in new tab? Default is current window.
+		currentPage   : false,          // Select the current page?
+		defaultOption : 'Choose...',    // Default option for `<select>`.
+		openTab       : false,          // Open link in new tab? Default is current window.
 		selectClass   : NS + '-select', // Class name for `<select>`.
-		selectId      : false,                    // ID name for `<select>`.
+		selectId      : false,          // ID name for `<select>`.
 		
 		// Callbacks:
 		
