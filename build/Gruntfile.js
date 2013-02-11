@@ -82,6 +82,12 @@ module.exports = function(grunt) {
 			
 		},
 		
+		//----------------------------------
+		
+		/**
+		 * @see https://github.com/gruntjs/grunt-contrib-concat
+		 */
+		
 		concat: {
 			
 			options: {
@@ -96,7 +102,8 @@ module.exports = function(grunt) {
 				dest: '../<%= pkg.name %>/jquery.<%= pkg.name %>.js'
 				
 			}
-		}
+			
+		},
 		
 	});
 	
