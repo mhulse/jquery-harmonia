@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		
 		meta: {
 			
-			banner_long: '/**\n' +
+			banner_long: '/*!\n' +
 			             ' * <%= pkg.title || pkg.name %>\n' +
 			             '<%= pkg.description ? " * " + pkg.description + "\\n" : "" %>' +
 			             ' *\n' +
@@ -74,12 +74,28 @@ module.exports = function(grunt) {
 				
 				files: {
 					
-					'../jquery.<%= pkg.name %>.min.js': ['src/jquery.<%= pkg.name %>.js']
+					'../jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js']
 					
 				}
 				
 			}
 			
+		},
+		
+		concat: {
+			
+			options: {
+				
+				banner: '<%= meta.banner_long %>'
+				
+			},
+			
+			dist: {
+				
+				src: ['src/jquery.<%= pkg.name %>.js'],
+				dest: '../jquery.<%= pkg.name %>.js'
+				
+			}
 		}
 		
 	});
@@ -90,8 +106,10 @@ module.exports = function(grunt) {
 	
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	
 	//----------------------------------
 	
-	grunt.registerTask('default', ['jshint', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'uglify', 'concat']);
 	
 };

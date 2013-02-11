@@ -1,4 +1,15 @@
-//----------------------------------
+/*!
+ * jQuery Harmonia
+ * A jQuery plugin to replace an (un)ordered list with a form select.
+ *
+ * @author Micky Hulse
+ * @link http://hulse.me
+ * @docs https://github.com/registerguard/jquery-harmonia
+ * @copyright Copyright (c) 2013 Micky Hulse.
+ * @license Released under the Apache License, Version 2.0.
+ * @version 1.0.0
+ * @date 2013/02/10
+ *///----------------------------------
 
 // Notes to self:
 //console.profile('profile foo');

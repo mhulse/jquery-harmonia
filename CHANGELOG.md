@@ -14,6 +14,8 @@
 * Updated license.
 * Removed `TODO.html`.
 * Updated `README.html` with docs and examples.
+* Build a copy of the un-minified plugin, with banner, and put it here: `/harmonia/jquery.harmonia.js`.
+	* Using `concat` for the copy and banner creation.
 * JS changes:
 	* Passing closure to pass-in `$, window, document, undefined`.
 	* Updated code to handle `console` statements better.
