@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 				
 				files: {
 					
-					'../jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js']
+					'../harmonia/jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js']
 					
 				}
 				
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 			dist: {
 				
 				src: ['src/jquery.<%= pkg.name %>.js'],
-				dest: '../jquery.<%= pkg.name %>.js'
+				dest: '../harmonia/jquery.<%= pkg.name %>.js'
 				
 			}
 		}
