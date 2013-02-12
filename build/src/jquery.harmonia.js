@@ -17,11 +17,21 @@
 	
 	//--------------------------------------------------------------------------
 	//
-	// Globals:
+	// Local "globals":
 	//
 	//--------------------------------------------------------------------------
 	
-	var console = window.console || { log : function() {}, warn : function() {} }, // Javascript console.
+	/**
+	 * Javascript console.
+	 *
+	 * @see rgne.ws/12p2bvl
+	 */
+	
+	var console = window.console || { log : function() {}, warn : function() {} },
+	
+	/**
+	 * The plugin namespace.
+	 */
 	
 	NS = 'harmonia', // The plugin namespace.
 	
@@ -31,10 +41,21 @@
 	//
 	//--------------------------------------------------------------------------
 	
+	/**
+	 * Methods object.
+	 *
+	 * @type { object }
+	 */
+	
 	methods = {
 		
 		/**
 		 * Init constructor.
+		 *
+		 * @type { function }
+		 * @param { object } opts Options object literal.
+		 * @this { object.jquery }
+		 * @return { object.jquery } Returns target object(s) for chaining purposes.
 		 */
 		
 		init : function(opts) {
@@ -81,7 +102,11 @@
 						
 					});
 					
-					data = $this.data(NS); // Make it easy for the rest of init.
+					//----------------------------------
+					// Easy access:
+					//----------------------------------
+					
+					data = $this.data(NS);
 					
 				}
 				
@@ -547,10 +572,6 @@
 	
 	$.fn[NS] = function(method) {
 		
-		//----------------------------------
-		// Boilerplate:
-		//----------------------------------
-		
 		if (methods[method]) {
 			
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -561,7 +582,7 @@
 			
 		} else {
 			
-			$.error('Method ' + method + ' does not exist on jQuery.' + NS); // Should I override? rgne.ws/MwgkP8
+			$.error('jQuery.' + NS + ' thinks that ' + method + ' doesn\'t exist'); // Should I override? rgne.ws/MwgkP8
 			
 		}
 		
