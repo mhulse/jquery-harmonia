@@ -9,7 +9,9 @@
  * @license Released under the Apache License, Version 2.0.
  * @version 1.0.0
  * @date 2013/02/12
- *///----------------------------------
+ */
+
+//----------------------------------
 
 // Notes to self:
 //console.profile('profile foo');
