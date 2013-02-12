@@ -32,7 +32,7 @@
 	//
 	//--------------------------------------------------------------------------
 	
-	var console = window.console || { log : function() {}, warn : function() {} },  // Javascript console.
+	var console = window.console || { log : function() {}, warn : function() {} }, // Javascript console.
 	
 	NS = 'harmonia', // The plugin namespace.
 	
