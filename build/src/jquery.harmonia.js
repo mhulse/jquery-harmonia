@@ -437,7 +437,7 @@
 				
 				var $option  = $('<option />'),
 				    selected = false,
-				    uri      = ($a.attr('href') || ''); // Current `<a>`'s uri.
+				    link     = ($a.attr('href') || ''); // Current `<a>`'s href.
 				
 				//----------------------------------
 				// Something currently selected?
@@ -456,20 +456,25 @@
 					} else if (data.options.currentPage) {
 						
 						//----------------------------------
-						// Ignore hashes and compare URI:
+						// Ignore hashes and compare URLs:
 						//----------------------------------
 						
-						if (uri != '#') {
-							
-							var href = $(location).attr('href');
+						if (link != '#') {
 							
 							//----------------------------------
-							// Compare directly & `indexOf()`:
+							// Get the location's href:
 							//----------------------------------
 							
-							if ((uri == href) || (href.indexOf(uri) > 0)) {
+							var href  = window.location.href.toLowerCase(),
+							    ahref = link.toLowerCase();
+							
+							//----------------------------------
+							// Compare directly or indexOf():
+							//----------------------------------
+							
+							if ((href == ahref) || (href.indexOf(ahref) != -1)) { // rgne.ws/XypNhG
 								
-								selected = true; // Warning: `indexOf()` will pass if `-1`; need to explicitly check for `> 0`!
+								selected = true;
 								
 							}
 							
@@ -503,7 +508,7 @@
 				// Location value:
 				//----------------------------------
 				
-				$option.attr('value', uri);
+				$option.attr('value', link);
 				
 				//----------------------------------
 				// Assign text to `<option>`:
