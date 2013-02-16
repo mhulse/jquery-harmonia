@@ -49,11 +49,11 @@ Use CSS media queries to show/hide the HTML list/form select(s) as necessary.
 
 #### OPTIONS
 
-* `currentPage`: Select the current page?
-* `defaultOption`: Default option for `<select>`.
-* `openTab`: Open link in new tab? Default is current window.
-* `selectClass`: Class name for `<select>`.
-* `selectId`: ID name for `<select>`.
+* `currentPage`: Select the current page? Default: `false`.
+* `defaultOption`: Default option for `<select>`.Default: `Choose…`.
+* `openTab`: Open link in new tab? Default is current window.Default: `false`.
+* `selectClass`: Class name for `<select>`.Default: `harmonia-select`.
+* `selectId`: ID name for `<select>`.Default: `false`.
 
 **Callbacks:**
 
