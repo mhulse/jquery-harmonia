@@ -13,7 +13,13 @@
 
 ;(function($, window, document, undefined) {
 	
-	'use strict'; // Lint setting.
+	/**
+	 * Function-level strict mode syntax.
+	 *
+	 * @see rgne.ws/XcZgn8
+	 */
+	
+	'use strict';
 	
 	//--------------------------------------------------------------------------
 	//
@@ -29,11 +35,23 @@
 	
 	var console = window.console || { log : function() {}, warn : function() {} },
 	
+	//----------------------------------
+	
 	/**
 	 * The plugin namespace.
 	 */
 	
 	NS = 'harmonia', // The plugin namespace.
+	
+	//----------------------------------
+	
+	/**
+	 * Settings object.
+	 *
+	 * @type { object }
+	 */
+	
+	settings = {}, // Initialize settings object.
 	
 	//--------------------------------------------------------------------------
 	//
@@ -67,25 +85,28 @@
 			return this.each(function() {
 				
 				//----------------------------------
-				// Local variable(s):
+				// Declare/initialize:
 				//----------------------------------
 				
-				var $this   = $(this),                                                  // Target object.
-				    data    = $this.data(NS),                                           // Namespace instance data.
-				    options = $.extend({}, settings.external, $.fn[NS].defaults, opts); // Merge settings, defaults and opts.
+				var $this = $(this),        // Target object.
+				    data  = $this.data(NS), // Namespace instance data.
+				    options,
+				    $hrefs,
+				    $select;
 				
 				//----------------------------------
-				// Initialize data:
+				// Data?
 				//----------------------------------
 				
 				if ( ! data) {
 					
 					//----------------------------------
-					// Setup variables:
+					// Initialize:
 					//----------------------------------
 					
-					var $hrefs  = $this.find('> li > a'),
-					    $select = $('<select>', { 'class' : options.selectClass });
+					options = $.extend({}, settings.external, $.fn[NS].defaults, opts); // Merge settings, defaults and opts.
+					$hrefs  = $this.find('> li > a');
+					$select = $('<select>', { 'class' : options.selectClass });
 					
 					//----------------------------------
 					// Namespaced instance data:
@@ -157,7 +178,7 @@
 			return this.each(function() {
 				
 				//----------------------------------
-				// Local variable(s):
+				// Declare/initialize:
 				//----------------------------------
 				
 				var $this = $(this),
@@ -218,6 +239,12 @@
 	_main = function(data) {
 		
 		//----------------------------------
+		// Declare:
+		//----------------------------------
+		
+		var $default;
+		
+		//----------------------------------
 		// Data?
 		//----------------------------------
 		
@@ -271,7 +298,7 @@
 					// Get the `<option>`:
 					//----------------------------------
 					
-					var $default = _optionize.call(data.target, $('<a />'), data.options.defaultOption);
+					$default = _optionize.call(data.target, $('<a />'), data.options.defaultOption);
 					
 					//----------------------------------
 					// Append `<option>` to `<select>`:
@@ -292,10 +319,10 @@
 				data.hrefs.each(function() {
 					
 					//----------------------------------
-					// Get the `<option>`:
+					// Declare/initialize:
 					//----------------------------------
 					
-					var $option = _optionize.call(data.target, $(this));
+					var $option = _optionize.call(data.target, $(this)); // Get the `<option>`.
 					
 					//----------------------------------
 					// Append `<option>` to `<select>`:
@@ -316,10 +343,11 @@
 				data.select.change(function() {
 					
 					//----------------------------------
-					// Local variable(s):
+					// Declare/initialize:
 					//----------------------------------
 					
-					var $this = $(this);
+					var $this = $(this),
+					    val;
 					
 					//----------------------------------
 					// Callback:
@@ -331,7 +359,7 @@
 					// Get link value:
 					//----------------------------------
 					
-					var val = $this.val();
+					val = $this.val();
 					
 					//----------------------------------
 					// Follow link value?
@@ -407,11 +435,16 @@
 	_optionize = function($a, text) {
 		
 		//----------------------------------
-		// Local variable(s):
+		// Declare/initialize:
 		//----------------------------------
 		
 		var $return = '',
-		    data    = this.data(NS);
+		    data    = this.data(NS),
+		    $option,
+		    selected,
+		    link,
+		    href,
+		    ahref;
 		
 		//----------------------------------
 		// Data?
@@ -432,12 +465,12 @@
 			if (text.length) {
 				
 				//----------------------------------
-				// Create `<option>` element:
+				// Initialize:
 				//----------------------------------
 				
-				var $option  = $('<option />'),
-				    selected = false,
-				    link     = ($a.attr('href') || ''); // Current `<a>`'s href.
+				$option  = $('<option />'); // Create `<option>` element.
+				selected = false;
+				link     = ($a.attr('href') || ''); // Current `<a>`'s href.
 				
 				//----------------------------------
 				// Something currently selected?
@@ -462,11 +495,11 @@
 						if (link != '#') {
 							
 							//----------------------------------
-							// Get the location's href:
+							// Get hrefs:
 							//----------------------------------
 							
-							var href  = window.location.href.toLowerCase(),
-							    ahref = link.toLowerCase();
+							href  = window.location.href.toLowerCase();
+							ahref = link.toLowerCase();
 							
 							//----------------------------------
 							// Compare directly or indexOf():
@@ -598,16 +631,6 @@
 	// Defaults and settings:
 	//
 	//--------------------------------------------------------------------------
-	
-	/**
-	 * Settings object.
-	 *
-	 * @type { object }
-	 */
-	
-	var settings = {}; // Initialize config object.
-	
-	//----------------------------------
 	
 	/**
 	 * Private settings.

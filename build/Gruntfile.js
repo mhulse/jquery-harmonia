@@ -2,9 +2,13 @@
 
 module.exports = function(grunt) {
 	
+	'use strict';
+	
 	grunt.initConfig({
 		
 		pkg: grunt.file.readJSON('package.json'),
+		
+		/*----------------------------------( META )----------------------------------*/
 		
 		meta: {
 			
@@ -30,20 +34,19 @@ module.exports = function(grunt) {
 			
 		},
 		
-		//----------------------------------
+		/*----------------------------------( 01 )----------------------------------*/
 		
 		/**
 		 * @see http://www.jshint.com/docs/
+		 * @see http://www.jshint.com/docs/
+		 * @see https://github.com/jshint/jshint/blob/r12/jshint.js#L256
 		 */
 		
 		jshint: {
 			
 			options: {
 				
-				smarttabs: true,
-				browser: true,
-				quotmark: true,
-				curly: true
+				jshintrc: '.jshintrc'
 				
 			},
 			
@@ -56,7 +59,7 @@ module.exports = function(grunt) {
 			
 		},
 		
-		//----------------------------------
+		/*----------------------------------( 02 )----------------------------------*/
 		
 		/**
 		 * @see https://github.com/gruntjs/grunt-contrib-uglify
@@ -82,7 +85,7 @@ module.exports = function(grunt) {
 			
 		},
 		
-		//----------------------------------
+		/*----------------------------------( 03 )----------------------------------*/
 		
 		/**
 		 * @see https://github.com/gruntjs/grunt-contrib-concat

@@ -36,7 +36,7 @@ Put some `html` on the page:
 Next, instantiate the plugin:
 
 ```html
-<script type="text/javascript">
+<script>
 	<!--
 		
 		$('.myList').harmonia();
