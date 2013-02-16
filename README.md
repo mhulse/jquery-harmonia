@@ -47,6 +47,8 @@ Next, instantiate the plugin:
 
 Use CSS media queries to show/hide the HTML list/form select(s) as necessary.
 
+---
+
 #### OPTIONS
 
 * `currentPage`: Select the current page? Default: `false`.
@@ -68,7 +70,7 @@ Use CSS media queries to show/hide the HTML list/form select(s) as necessary.
 
 [![qr code](http://chart.apis.google.com/chart?cht=qr&chl=https://github.com/registerguard/jquery-harmonia/&chs=240x240)](http://registerguard.github.com/jquery-harmonia/demo/)
 
-(Scan QR code with phone and/or click to [view the latest demo](http://registerguard.github.com/jquery-harmonia/demo/).)
+Scan QR code with phone and/or click to [view the latest demo](http://registerguard.github.com/jquery-harmonia/demo/). Resize the browser window to see the plugin(s) in action (Firefox 15+ users, check out [Responsive Design View](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_View)).
 
 ---
 

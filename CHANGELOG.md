@@ -22,7 +22,7 @@
 * Build a copy of the un-minified plugin, with banner, and put it here: `/harmonia/jquery.harmonia.js`.
 	* Using `concat` for the copy and banner creation.
 * JS changes:
-	* Passing closure to pass-in `$, window, document, undefined`.
+	* Updated closure with `$, window, document, undefined`.
 	* Updated code to handle `console` statements better.
 	* Ditched the `constants` object.
 	* Updated `if` statements to use curly braces.
