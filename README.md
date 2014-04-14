@@ -1,5 +1,7 @@
 # jQuery Harmonia
 
+![Harmonia gif demo](harmonia.gif)
+
 ### Replace an (un)ordered list with a form select.
 
 ---
