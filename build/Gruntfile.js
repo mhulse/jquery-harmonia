@@ -7,6 +7,8 @@ module.exports = function(grunt) {
 	
 	grunt.initConfig({
 		
+		/*----------------------------------( PACKAGE )----------------------------------*/
+		
 		pkg: grunt.file.readJSON('package.json'),
 		
 		/*----------------------------------( BANNERS )----------------------------------*/
@@ -41,35 +43,63 @@ module.exports = function(grunt) {
 			
 		},
 		
-		/*----------------------------------( 01 )----------------------------------*/
+		/*----------------------------------( JSHINT )----------------------------------*/
 		
 		/**
+		 * Validate files with JSHint.
+		 *
+		 * @see https://github.com/gruntjs/grunt-contrib-jshint
 		 * @see http://www.jshint.com/docs/
-		 * @see http://www.jshint.com/docs/
-		 * @see https://github.com/jshint/jshint/blob/r12/jshint.js#L256
 		 */
 		
 		jshint: {
 			
 			options: {
 				
-				jshintrc: '.jshintrc'
+				jshintrc: '.jshintrc',
 				
 			},
 			
 			init: [
 				
 				'./Gruntfile.js',
-				'./src/jquery.<%= pkg.name %>.js'
+				'./src/jquery.<%= pkg.name %>.js',
 				
-			]
+			],
 			
 		},
 		
-		/*----------------------------------( 02 )----------------------------------*/
+		/*----------------------------------( CLEAN )----------------------------------*/
 		
 		/**
+		 * Clean files and folders.
+		 *
+		 * @see https://github.com/gruntjs/grunt-contrib-clean
+		 */
+		
+		clean : {
+			
+			options : {
+				
+				force : true, // Allows for deletion of folders outside current working dir (CWD). Use with caution.
+				
+			},
+			
+			files : [
+				
+				'../<%= pkg.name %>/**/*',
+				
+			],
+			
+		},
+		
+		/*----------------------------------( UGLIFY )----------------------------------*/
+		
+		/**
+		 * Minify files with UglifyJS.
+		 *
 		 * @see https://github.com/gruntjs/grunt-contrib-uglify
+		 * @see http://lisperator.net/uglifyjs/
 		 */
 		
 		uglify: {
@@ -78,23 +108,25 @@ module.exports = function(grunt) {
 				
 				options: {
 					
-					banner: '<%= banner.short %>'
+					banner: '<%= banner.short %>',
 					
 				},
 				
 				files: {
 					
-					'../<%= pkg.name %>/jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js']
+					'../<%= pkg.name %>/jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js'],
 					
-				}
+				},
 				
-			}
+			},
 			
 		},
 		
-		/*----------------------------------( 03 )----------------------------------*/
+		/*----------------------------------( CONCAT )----------------------------------*/
 		
 		/**
+		 * Concatenate files.
+		 *
 		 * @see https://github.com/gruntjs/grunt-contrib-concat
 		 */
 		
@@ -102,24 +134,26 @@ module.exports = function(grunt) {
 			
 			options: {
 				
-				banner: '<%= banner.long %>'
+				banner: '<%= banner.long %>',
 				
 			},
 			
 			dist: {
 				
 				src: ['./src/jquery.<%= pkg.name %>.js'],
-				dest: '../<%= pkg.name %>/jquery.<%= pkg.name %>.js'
+				dest: '../<%= pkg.name %>/jquery.<%= pkg.name %>.js',
 				
-			}
+			},
 			
-		}
+		},
 		
 	});
 	
-	//--------------------------------------------------------------------
+	/*----------------------------------( TASKS )----------------------------------*/
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	
@@ -127,6 +161,6 @@ module.exports = function(grunt) {
 	
 	//----------------------------------
 	
-	grunt.registerTask('default', ['jshint', 'uglify', 'concat']);
+	grunt.registerTask('default', ['jshint', 'clean', 'uglify', 'concat',]);
 	
 };
