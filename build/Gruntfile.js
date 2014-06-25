@@ -1,4 +1,5 @@
-/*global module:false */
+/* jslint es3: false */
+/* global module:false */
 
 module.exports = function(grunt) {
 	

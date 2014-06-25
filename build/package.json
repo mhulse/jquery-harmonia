@@ -3,15 +3,14 @@
   "name": "harmonia",
   "description": "Replace an (un)ordered list with a form select.",
   "version": "1.0.0",
-  "homepage": "https://github.com/registerguard/jquery-harmonia",
-  "main": "jquery.harmonia.js",
+  "homepage": "https://github.com/mhulse/jquery-harmonia",
   "repository": {
     "type": "git",
-    "url": "git://github.com/registerguard/jquery-harmonia.git"
+    "url": "git://github.com/mhulse/jquery-harmonia.git"
   },
   "author": {
     "name": "Micky Hulse",
-    "url": "http://hulse.me"
+    "url": "http://mky.io"
   },
   "keywords": [
     "html5",
@@ -24,12 +23,11 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "grunt": "0.4.0rc7",
-    "grunt-contrib-jshint": "0.1.1rc6",
-    "grunt-contrib-nodeunit": "0.1.2rc6",
-    "grunt-contrib-uglify": "0.1.1rc6",
-    "grunt-contrib-concat": "0.1.2rc6"
-  }
+  "dependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-contrib-uglify": "0.5.0",
+    "grunt-contrib-concat": "0.4.0"
+  },
+  "devDependencies": {}
 }

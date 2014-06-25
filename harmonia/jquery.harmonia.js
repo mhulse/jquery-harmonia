@@ -1,14 +1,14 @@
-/*!
+/**
  * jQuery Harmonia
  * Replace an (un)ordered list with a form select.
  *
  * @author Micky Hulse
- * @link http://hulse.me
- * @docs https://github.com/registerguard/jquery-harmonia
- * @copyright Copyright (c) 2013 Micky Hulse.
+ * @link http://mky.io
+ * @docs https://github.com/mhulse/jquery-harmonia
+ * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 1.0.0
- * @date 2013/02/16
+ * @date 2014/06/24
  */
 
 //----------------------------------

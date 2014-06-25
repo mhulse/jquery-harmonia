@@ -30,8 +30,8 @@
 	"laxbreak"      : false,    // If line breaks should not be checked.
 	"laxcomma"      : false,    // If line breaks should not be checked around commas.
 	"loopfunc"      : false,    // If functions should be allowed to be defined within loops.
-	"maxcomplexity" : 10,       // {int} Maximum cyclomatic complexity per function.
-	"maxdepth"      : 5,        // {int} Maximum nested block depth per function.
+	"maxcomplexity" : 15,       // {int} Maximum cyclomatic complexity per function.
+	"maxdepth"      : 10,       // {int} Maximum nested block depth per function.
 	"maxerr"        : false,    // {int} Maximum number of errors.
 	"maxlen"        : 1000,     // {int} maximum length of a line.
 	"maxparams"     : 5,        // {int} Maximum params per function.
