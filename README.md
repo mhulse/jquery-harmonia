@@ -76,6 +76,13 @@ Scan QR code with phone and/or click to [view the latest demo](http://registergu
 
 ---
 
+#### LINKS
+
+* [Menutron](https://github.com/micjamking/Menutron)
+* [jQuery Responsive Menu Plugin](https://github.com/mattkersley/Responsive-Menu)
+
+---
+
 #### LEGAL
 
 Copyright © 2013 [Micky Hulse](http://hulse.me)/[The Register-Guard](http://registerguard.com)
