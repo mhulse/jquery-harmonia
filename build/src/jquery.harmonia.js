@@ -58,11 +58,12 @@
 	defaults = {
 		
 		currentPage   : false,              // Select the current page?
-		optionDefault : 'Choose...',        // Default option for `<select>`.
+		optionDefault : 'Choose...',        // Default option text for `<select>`.
 		openTab       : false,              // Open link in new tab? Default is current window.
-		classSelect   : NS + '-select',     // Class name for `<select>`.
-		classInit     : NS + '-js-enabled', // Target menu.
-		idSelect      : '',                 // ID name for `<select>`.
+		classSelect   : NS + '-select',     // Class name for `<select>`; class applied to generated `<select>` element(s).
+		classInit     : NS + '-js-enabled', // Target menu; class name applied to instantiated element(s).
+		idSelect      : '',                 // ID name for `<select>`; default is no ID.
+		target        : '',                 // Target location for `<select>`; default is before instantiated target element.
 		
 		// Callbacks:
 		

@@ -71,11 +71,12 @@
 	defaults = {
 		
 		currentPage   : false,              // Select the current page?
-		optionDefault : 'Choose...',        // Default option for `<select>`.
+		optionDefault : 'Choose...',        // Default option text for `<select>`.
 		openTab       : false,              // Open link in new tab? Default is current window.
-		classSelect   : NS + '-select',     // Class name for `<select>`.
-		classInit     : NS + '-js-enabled', // Target menu.
-		idSelect      : '',              // ID name for `<select>`.
+		classSelect   : NS + '-select',     // Class name for `<select>`; class applied to generated `<select>` element(s).
+		classInit     : NS + '-js-enabled', // Target menu; class name applied to instantiated element(s).
+		idSelect      : '',                 // ID name for `<select>`; default is no ID.
+		target        : '',                 // Target location for `<select>`; default is before instantiated target element.
 		
 		// Callbacks:
 		
@@ -205,7 +206,7 @@
 			return this.each(function() {
 				
 				//----------------------------------
-				// Declare/initialize:
+				// Declare, hoist and initialize:
 				//----------------------------------
 				
 				var $this = $(this),
@@ -260,7 +261,7 @@
 	_main = function(data) {
 		
 		//----------------------------------
-		// Declare:
+		// Declare, hoist and initialize:
 		//----------------------------------
 		
 		var $default;
@@ -354,7 +355,7 @@
 				data.hrefs.each(function() {
 					
 					//----------------------------------
-					// Declare/initialize:
+					// Declare, hoist and initialize:
 					//----------------------------------
 					
 					var $option = _optionize.call(data.target, $(this)); // Get the `<option>`.
@@ -378,7 +379,7 @@
 				data.select.change(function() {
 					
 					//----------------------------------
-					// Declare/initialize:
+					// Declare, hoist and initialize:
 					//----------------------------------
 					
 					var $this = $(this),
@@ -446,7 +447,7 @@
 				// Problemos:
 				//----------------------------------
 				
-				console.warn('jQuery.' + NS, 'thinks there\'s a problem with your markup');
+				console.warn('jQuery.%s there\'s a problem with your markup', NS);
 				
 			}
 			
@@ -470,7 +471,7 @@
 	_optionize = function($a, text) {
 		
 		//----------------------------------
-		// Declare/initialize:
+		// Declare, hoist and initialize:
 		//----------------------------------
 		
 		var $return = '',
