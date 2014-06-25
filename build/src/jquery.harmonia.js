@@ -33,7 +33,7 @@
 	 * @see rgne.ws/12p2bvl
 	 */
 	
-	var console = window.console || { log : function() {}, warn : function() {} },
+	var console = window.console || { log : $.noop, warn : $.noop },
 	
 	//----------------------------------
 	
