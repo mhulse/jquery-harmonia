@@ -31,7 +31,7 @@
 	
 	<hr>
 	
-	<ul class="myList toDestroy">
+	<ul class="myList toDestroy" data-harmonia-options='{ "classSelect" : "omgWtf", "idSelect" : "yolo" }'>
 		<li><a href="http://en.wikipedia.org/wiki/Phorcys">Phorcys</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Triton_(mythology)">Triton</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Ouranos">Ouranos</a></li>
@@ -43,11 +43,16 @@
 	</ul>
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="../harmonia/jquery.harmonia.min.js"></script>
+	<script src="../harmonia/jquery.harmonia.js"></script>
 	
 	<script>
 		
 		$(document).ready(function() {
+			
+			console.log($.fn.harmonia);
+			
+			// Set default:
+			$.fn.harmonia.defaults.idSelect = 'foo';
 			
 			$('.myList').harmonia({
 				//openTab     : true,

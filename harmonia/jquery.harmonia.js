@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 1.1.0
- * @date 2014/06/24
+ * @date 2014/06/25
  */
 
 //----------------------------------
@@ -29,7 +29,7 @@
 	/**
 	 * Function-level strict mode syntax.
 	 *
-	 * @see rgne.ws/XcZgn8
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
 	 */
 	
 	'use strict';
@@ -43,10 +43,10 @@
 	/**
 	 * Javascript console.
 	 *
-	 * @see rgne.ws/12p2bvl
+	 * @see http://www.paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
 	 */
 	
-	var console = window.console || { log : function() {}, warn : function() {} },
+	var console = window.console || { log : $.noop, warn : $.noop },
 	
 	//----------------------------------
 	
@@ -54,17 +54,37 @@
 	 * The plugin namespace.
 	 */
 	
-	NS = 'harmonia', // The plugin namespace.
+	NS = 'harmonia',
 	
-	//----------------------------------
+	//--------------------------------------------------------------------------
+	//
+	// Defaults/settings:
+	//
+	//--------------------------------------------------------------------------
 	
 	/**
-	 * Settings object.
+	 * Public defaults.
 	 *
 	 * @type { object }
 	 */
 	
-	settings = {}, // Initialize settings object.
+	defaults = {
+		
+		currentPage   : false,              // Select the current page?
+		optionDefault : 'Choose...',        // Default option for `<select>`.
+		openTab       : false,              // Open link in new tab? Default is current window.
+		classSelect   : NS + '-select',     // Class name for `<select>`.
+		classInit     : NS + '-js-enabled', // Target menu.
+		idSelect      : '',              // ID name for `<select>`.
+		
+		// Callbacks:
+		
+		onInit      : $.noop, // After plugin data initialized.
+		onAfterInit : $.noop, // After plugin initialization.
+		onAddOption : $.noop, // Called when a new option has been added.
+		onChange    : $.noop  // Called when `<select>` changes.
+		
+	}, // defaults.external
 	
 	//--------------------------------------------------------------------------
 	//
@@ -84,12 +104,12 @@
 		 * Init constructor.
 		 *
 		 * @type { function }
-		 * @param { object } opts Options object literal.
+		 * @param { object } options Options object literal.
 		 * @this { object.jquery }
 		 * @return { object.jquery } Returns target object(s) for chaining purposes.
 		 */
 		
-		init : function(opts) {
+		init : function(options) {
 			
 			//----------------------------------
 			// Loop & return each this:
@@ -98,14 +118,12 @@
 			return this.each(function() {
 				
 				//----------------------------------
-				// Declare/initialize:
+				// Declare, hoist and initialize:
 				//----------------------------------
 				
 				var $this = $(this),        // Target object.
 				    data  = $this.data(NS), // Namespace instance data.
-				    options,
-				    $hrefs,
-				    $select;
+				    settings;               // Settings object.
 				
 				//----------------------------------
 				// Data?
@@ -117,9 +135,7 @@
 					// Initialize:
 					//----------------------------------
 					
-					options = $.extend({}, settings.external, $.fn[NS].defaults, opts); // Merge settings, defaults and opts.
-					$hrefs  = $this.find('> li > a');
-					$select = $('<select>', { 'class' : options.selectClass });
+					settings = $.extend(true, {}, defaults, $.fn[NS].defaults, options, $this.data(NS + 'Options')); // Recursively merge defaults, options and HTML5 `data-` attribute options.
 					
 					//----------------------------------
 					// Namespaced instance data:
@@ -127,12 +143,12 @@
 					
 					$this.data(NS, {
 						
-						hrefs   : $hrefs,
-						init    : false,
-						matched : false,
-						options : options,
-						select  : $select,
-						target  : $this
+						init     : false,
+						settings : settings,
+						target   : $this,
+						matched  : false,
+						hrefs    : $this.find('> li > a'),
+						select   : $('<select>', { 'class' : settings.classSelect })
 						
 					});
 					
@@ -162,9 +178,7 @@
 					// Ouch!
 					//----------------------------------
 					
-					console.warn('jQuery.' + NS, 'thinks it\'s already initialized on', this);
-					
-					//return this; // Needed?
+					console.warn('jQuery.%s thinks it\'s already initialized on %o.', NS, this);
 					
 				}
 				
@@ -204,22 +218,16 @@
 				if (data) {
 					
 					//----------------------------------
-					// Local variable(s):
-					//----------------------------------
-					
-					//var options = data.options;
-					
-					//----------------------------------
 					// Remove root menu CSS class:
 					//----------------------------------
 					
-					$this.removeClass(settings.internal.initClass);
+					$this.removeClass(data.settings.classInit);
 					
 					//----------------------------------
 					// Remove generated HTML:
 					//----------------------------------
 					
-					data.select.remove(); // All bound events and jQuery data associated with the elements are removed: rgne.ws/LqMnF5
+					data.select.remove(); // All bound events and jQuery data associated with the elements are removed: http://api.jquery.com/remove/
 					
 					//----------------------------------
 					// Namespaced instance data:
@@ -287,7 +295,7 @@
 			// Callback:
 			//----------------------------------
 			
-			data.options.onInit.call(data.target);
+			data.settings.onInit.call(data.target);
 			
 			//----------------------------------
 			// Check for object(s):
@@ -299,19 +307,33 @@
 				// Root menu CSS class:
 				//----------------------------------
 				
-				data.target.addClass(settings.internal.initClass);
+				data.target.addClass(data.settings.classInit);
+				
+				//----------------------------------
+				// Is there a `<select>` ID?
+				//----------------------------------
+				
+				if (data.settings.idSelect.length) {
+					
+					//----------------------------------
+					// Apply to `<select>`:
+					//----------------------------------
+					
+					data.select.attr('id', data.settings.idSelect);
+					
+				}
 				
 				//----------------------------------
 				// Default `<select>` `<option>`?
 				//----------------------------------
 				
-				if (data.options.defaultOption) {
+				if (data.settings.optionDefault) {
 					
 					//----------------------------------
 					// Get the `<option>`:
 					//----------------------------------
 					
-					$default = _optionize.call(data.target, $('<a />'), data.options.defaultOption);
+					$default = _optionize.call(data.target, $('<a />'), data.settings.optionDefault);
 					
 					//----------------------------------
 					// Append `<option>` to `<select>`:
@@ -366,7 +388,7 @@
 					// Callback:
 					//----------------------------------
 					
-					data.options.onChange.call(data.target, $this); // @TODO: Is this the best spot for this?
+					data.settings.onChange.call(data.target, $this); // @TODO: Is this the best spot for this?
 					
 					//----------------------------------
 					// Get link value:
@@ -384,13 +406,13 @@
 						// Ignore default `<select>`:
 						//----------------------------------
 						
-						if (val !== data.options.defaultOption) {
+						if (val !== data.settings.optionDefault) {
 							
 							//----------------------------------
 							// Open tab or use current window:
 							//----------------------------------
 							
-							if (data.options.openTab) {
+							if (data.settings.openTab) {
 								
 								window.open(val); // New tab.
 								
@@ -416,7 +438,7 @@
 				// Callback:
 				//----------------------------------
 				
-				data.options.onAfterInit.call(data.target);
+				data.settings.onAfterInit.call(data.target);
 				
 			} else {
 				
@@ -499,7 +521,7 @@
 						
 						selected = true; // Yup. Force selected.
 						
-					} else if (data.options.currentPage) {
+					} else if (data.settings.currentPage) {
 						
 						//----------------------------------
 						// Ignore hashes and compare URLs:
@@ -518,7 +540,7 @@
 							// Compare directly or indexOf():
 							//----------------------------------
 							
-							if ((href == ahref) || (href.indexOf(ahref) != -1)) { // rgne.ws/XypNhG
+							if ((href == ahref) || (href.indexOf(ahref) != -1)) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 								
 								selected = true;
 								
@@ -578,7 +600,7 @@
 		// Callback:
 		//----------------------------------
 		
-		data.options.onAddOption.call(this, $return);
+		data.settings.onAddOption.call(this, $return);
 		
 		//----------------------------------
 		// Return `<option>` or nothing:
@@ -633,64 +655,25 @@
 			
 		} else {
 			
-			$.error('jQuery.' + NS + ' thinks that ' + method + ' doesn\'t exist'); // Should I override? rgne.ws/MwgkP8
+			$.error('jQuery.' + NS + ' thinks that ' + method + ' doesn\'t exist');
 			
 		}
 		
 	}; // $.fn[NS]
 	
-	//--------------------------------------------------------------------------
-	//
-	// Defaults and settings:
-	//
-	//--------------------------------------------------------------------------
-	
-	/**
-	 * Private settings.
-	 *
-	 * @private
-	 * @type { object }
-	 */
-	
-	settings.internal = {
-		
-		initClass : NS + '-js-enabled' // Target menu.
-		
-	}; // settings.internal
-	
 	//----------------------------------
 	
 	/**
-	 * Public settings.
+	 * Public defaults.
+	 *
+	 * Example:
+	 * $.fn.harmonia.defaults.idSelect = 'foo';
+	 *
+	 * @see http://stackoverflow.com/questions/11306375/plugin-authoring-how-to-allow-myplugin-defaults-key-value
 	 *
 	 * @type { object }
 	 */
 	
-	settings.external = {
-		
-		currentPage   : false,          // Select the current page?
-		defaultOption : 'Choose...',    // Default option for `<select>`.
-		openTab       : false,          // Open link in new tab? Default is current window.
-		selectClass   : NS + '-select', // Class name for `<select>`.
-		selectId      : false,          // ID name for `<select>`.
-		
-		// Callbacks:
-		
-		onInit      : $.noop, // After plugin data initialized.
-		onAfterInit : $.noop, // After plugin initialization.
-		onAddOption : $.noop, // Called when a new option has been added.
-		onChange    : $.noop  // Called when `<select>` changes.
-		
-	}; // settings.external
-	
-	//----------------------------------
-	
-	/**
-	 * Assign defaults to external.
-	 *
-	 * @type { object }
-	 */
-	
-	$.fn[NS].defaults = settings.external; // rgne.ws/Mxifnq
+	$.fn[NS].defaults = defaults;
 	
 }(jQuery, window, document));
