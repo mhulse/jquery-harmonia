@@ -8,29 +8,35 @@ module.exports = function(grunt) {
 		
 		pkg: grunt.file.readJSON('package.json'),
 		
-		/*----------------------------------( META )----------------------------------*/
+		/*----------------------------------( BANNERS )----------------------------------*/
 		
-		meta: {
+		/**
+		 * Short and long banners.
+		 *
+		 * @see http://gruntjs.com/getting-started#an-example-gruntfile
+		 */
+		
+		banner : {
 			
-			banner_long: '/*!\n' +
-			             ' * <%= pkg.title || pkg.name %>\n' +
-			             '<%= pkg.description ? " * " + pkg.description + "\\n" : "" %>' +
-			             ' *\n' +
-			             '<%= pkg.author.name ? " * @author " + pkg.author.name + "\\n" : "" %>' +
-			             '<%= pkg.author.url ? " * @link " + pkg.author.url + "\\n" : "" %>' +
-			             '<%= pkg.homepage ? " * @docs " + pkg.homepage + "\\n" : "" %>' +
-			             ' * @copyright Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>.\n' +
-			             '<%= pkg.licenses ? " * @license Released under the " + _.pluck(pkg.licenses, "type").join(", ") + ".\\n" : "" %>' +
-			             '<%= pkg.version ? " * @version " + pkg.version + "\\n" : "" %>' +
-			             ' * @date <%= grunt.template.today("yyyy/mm/dd") %>\n' +
-			             ' */\n\n',
+			'short' : '/*! ' +
+			          '<%= pkg.title || pkg.name %>' +
+			          '<%= pkg.version ? " v" + pkg.version : "" %>' +
+			          '<%= pkg.licenses ? " | " + _.pluck(pkg.licenses, "type").join(", ") : "" %>' +
+			          '<%= pkg.homepage ? " | " + pkg.homepage : "" %>' +
+			          ' */',
 			
-			banner_short: '/*! ' +
-			              '<%= pkg.title || pkg.name %>' +
-			              '<%= pkg.version ? " v" + pkg.version : "" %>' +
-			              '<%= pkg.licenses ? " | " + _.pluck(pkg.licenses, "type").join(", ") : "" %>' +
-			              '<%= pkg.homepage ? " | " + pkg.homepage : "" %>' +
-			              ' */'
+			'long' : '/**\n' +
+			         ' * <%= pkg.title || pkg.name %>\n' +
+			         '<%= pkg.description ? " * " + pkg.description + "\\n" : "" %>' +
+			         ' *\n' +
+			         '<%= pkg.author.name ? " * @author " + pkg.author.name + "\\n" : "" %>' +
+			         '<%= pkg.author.url ? " * @link " + pkg.author.url + "\\n" : "" %>' +
+			         '<%= pkg.homepage ? " * @docs " + pkg.homepage + "\\n" : "" %>' +
+			         ' * @copyright Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>.\n' +
+			         '<%= pkg.licenses ? " * @license Released under the " + _.pluck(pkg.licenses, "type").join(", ") + ".\\n" : "" %>' +
+			         '<%= pkg.version ? " * @version " + pkg.version + "\\n" : "" %>' +
+			         ' * @date <%= grunt.template.today("yyyy/mm/dd") %>\n' +
+			         ' */\n\n',
 			
 		},
 		
@@ -71,7 +77,7 @@ module.exports = function(grunt) {
 				
 				options: {
 					
-					banner: '<%= meta.banner_short %>'
+					banner: '<%= banner.short %>'
 					
 				},
 				
@@ -95,7 +101,7 @@ module.exports = function(grunt) {
 			
 			options: {
 				
-				banner: '<%= meta.banner_long %>'
+				banner: '<%= banner.long %>'
 				
 			},
 			
