@@ -63,7 +63,11 @@
 			
 			$('.myList').harmonia({
 				//openTab     : true,
-				currentPage : true
+				currentPage : true,
+				onInit        : function(data) { console.log('onInit:', $(this), data); },
+				onAfterInit   : function(data) { console.log('onAfterInit:', $(this), data); },
+				onAddOption   : function(data, ret) { console.log('onAddOption:', $(this), data, ret); },
+				onChange      : function(data, el) { console.log('onChange:', $(this), el); }
 			});
 			//$('.toDestroy').harmonia('destroy');
 			

@@ -70,23 +70,23 @@
 	
 	defaults = {
 		
-		currentPage   : false,              // Select the current page?
-		optionDefault : 'Choose...',        // Default option text for `<select>`.
-		openTab       : false,              // Open link in new tab? Default is current window.
-		classSelect   : NS + '-select',     // Class name for `<select>`; class applied to generated `<select>` element(s).
+		currentPage   : false,              // Select the current page? Default: `false`.
+		optionDefault : 'Choose ...',       // Default option for `<select>`. Default: `Choose ...`.
+		openTab       : false,              // Open link in new tab? Default is current window. Default: `false`.
+		classSelect   : NS + '-select',     // Class name for `<select>`; class applied to generated `<select>` element(s). Default: `harmonia-select`.
 		classInit     : NS + '-js-enabled', // Target menu; class name applied to instantiated element(s).
 		use           : '',                 // Replacement function to use when adding `<select>` to the DOM. Allowed values are `after`, `append`, `before` (default), `html`, and `prepend`.
 		
 		// Best if set via `data-` attribute options object:
 		idSelect  : '', // ID name for `<select>`; default is no ID.
-		elementId : '', // Target element ID for `<select>`; default is before instantiated target element.
+		elementId : '', // Target element ID for `<select>`.
 		
 		// Callbacks:
 		
-		onInit      : $.noop, // After plugin data initialized.
-		onAfterInit : $.noop, // After plugin initialization.
-		onAddOption : $.noop, // Called when a new option has been added.
-		onChange    : $.noop  // Called when `<select>` changes.
+		onInit      : $.noop, // Callback after plugin data initialized.
+		onAfterInit : $.noop, // Callback after plugin initialization.
+		onAddOption : $.noop, // Callback when a new option has been added.
+		onChange    : $.noop  // Callback when `<select>` changes.
 		
 	}, // defaults
 	
@@ -302,7 +302,7 @@
 			// Callback:
 			//----------------------------------
 			
-			data.settings.onInit.call(data.target);
+			data.settings.onInit.call(data.target, data);
 			
 			//----------------------------------
 			// Check for object(s):
@@ -469,7 +469,7 @@
 					// Callback:
 					//----------------------------------
 					
-					data.settings.onChange.call(data.target, $this); // @TODO: Is this the best spot for this?
+					data.settings.onChange.call(data.target, data, $this); // @TODO: Is this the best spot for this?
 					
 					//----------------------------------
 					// Get link value:
@@ -535,7 +535,7 @@
 				// Callback:
 				//----------------------------------
 				
-				data.settings.onAfterInit.call(data.target);
+				data.settings.onAfterInit.call(data.target, data);
 				
 				// Done!
 				
@@ -699,7 +699,7 @@
 		// Callback:
 		//----------------------------------
 		
-		data.settings.onAddOption.call(this, $return);
+		data.settings.onAddOption.call(data.target, data, $return);
 		
 		//----------------------------------
 		// Return `<option>` or nothing:
