@@ -16,7 +16,7 @@ Replace an (un)ordered list with a form select.
 
 Click or scan:
 
-[![qr code](http://chart.apis.google.com/chart?cht=qr&chl=https://github.com/registerguard/jquery-harmonia/&chs=240x240)](http://registerguard.github.com/jquery-harmonia/demo/)
+[![qr code](http://chart.apis.google.com/chart?cht=qr&chl=https://github.com/mhulse/jquery-harmonia/&chs=240x240)](http://mhulse.github.com/jquery-harmonia/demo/)
 
 Resize the browser window to see the plugin(s) in action (Firefox 15+ users, check out [Responsive Design View](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_View)).
 
@@ -83,7 +83,7 @@ Finally, instantiate the plugin:
 
 Here’s an example with all the options:
 
-```html
+```js
 $('.myList').harmonia({
 	currentPage   : false,
 	optionDefault : 'Choose ...',
@@ -130,6 +130,36 @@ Option | Description | Default
  **Note** the nesting order of the single (`'`) and double (`"`) quotes.
 
 1. All options may be defined statically, before plugin initialzation, using: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
+
+1. Nested lists may be used to create `<optgroup>`s.
+
+ For example:
+
+ ```html
+ <ul class="myList">
+ 	<li><a href="http://en.wikipedia.org/wiki/Phorcys">Phorcys</a></li>
+ 	<li>
+ 		<a href="#">Testing optgroups</a>
+ 		<ul>
+ 			<li><a href="https://www.google.com">Sub 1</a></il>
+ 			<li><a href="https://www.google.com">Sub 2</a></il>
+ 		</ul>
+ 	</li>
+ </ul>
+ ```
+
+ … which gets converted to:
+
+ ```html
+ <select class="myList">
+ 	<option selected="selected" value="">Choose ...</option>
+ 	<option value="http://en.wikipedia.org/wiki/Phorcys">Phorcys</option>
+ 	<optgroup label="Testing optgroups">
+ 		<option value="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup">Sub 1</option>
+ 		<option value="http://www.w3.org/wiki/HTML/Elements/optgroup">Sub 2</option>
+ 	</optgroup>
+ </select>
+ ```
 
 [Check out the demo page](http://mhulse.github.com/jquery-harmonia/demo/) for working examples of the aforementioned features.
 
