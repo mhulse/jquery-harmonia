@@ -65,8 +65,8 @@
 		use           : '',                 // Replacement function to use when adding `<select>` to the DOM. Allowed values are `after`, `append`, `before` (default), `html`, and `prepend`.
 		
 		// Best if set via `data-` attribute options object:
-		idSelect  : '', // ID name for `<select>`; default is no ID.
-		elementId : '', // Target element ID for `<select>`.
+		idSelect      : '', // ID name for `<select>`; default is no ID.
+		elementTarget : '', // Desired location to put the `<select>`; defaults to `before` (see `use` option) the current instantiated element.
 		
 		// Callbacks:
 		
@@ -141,7 +141,7 @@
 						lis      : $this.find('> li'),
 						hrefs    : $this.find('> li > a'),
 						select   : $('<select>', { 'class' : settings.classSelect }),
-						element  : ((settings.elementId) ? $(settings.elementId) : ''),
+						element  : ((settings.elementTarget) ? $(settings.elementTarget) : ''),
 						use      : ((settings.use && (/^(?:after|append|before|html|prepend|text)$/).test(settings.use)) ? settings.use : 'before') // If input is valid method name, use that; otherwise, default to `before` method.
 						
 					});

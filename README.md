@@ -92,7 +92,7 @@ $('.myList').harmonia({
 	classInit     : 'harmonia-js-enabled',
 	use           : 'before',
 	idSelect      : '#foo',
-	elementId     : 'before',
+	elementTarget : 'before',
 	onInit        : function(data) { console.log('onInit:', $(this), data); },
 	onAfterInit   : function(data) { console.log('onAfterInit:', $(this), data); },
 	onAddOption   : function(data, return) { console.log('onAddOption:', $(this), data, return); },
@@ -111,7 +111,7 @@ Option | Description | Default
 `classInit` | Target menu; class name applied to instantiated element(s). | `'harmonia-js-enabled'`
 `use` | Replacement function to use when adding `<select>` to the DOM. Allowed values are `after`, `append`, `before`, `html`, and `prepend`. | `'before'`
 `idSelect` | ID name for `<select>`. | `''`
-`elementId` | Target element ID for `<select>`. | `''`
+`elementTarget` | Desired location to put the `<select>`; defaults to `before` (see `use` option) the current instantiated element. | `''`
 `onInit` | Callback after plugin data initialized. | `$.noop`
 `onAfterInit` | Callback after plugin initialization. | `$.noop`
 `onAddOption` | Callback when a new option has been added. | `$.noop`
@@ -124,12 +124,14 @@ Option | Description | Default
  For example:
 
  ```html
- <ul class="myList toDestroy" data-harmonia-options='{ "classSelect" : "omgWtf", "idSelect" : "yolo", "elementId" : "#target", "use" : "after" }'> ... </ul>
+ <ul class="myList toDestroy" data-harmonia-options='{ "classSelect" : "omgWtf", "idSelect" : "yolo", "elementTarget" : "#target", "use" : "after" }'> ... </ul>
  ```
 
  **Note** the nesting order of the single (`'`) and double (`"`) quotes.
 
 1. All options may be defined statically, before plugin initialzation, using: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
+
+1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#foo" }'`, where `elementTarget` is: `<div id="foo"></div>`.
 
 1. Nested lists may be used to create `<optgroup>`s.
 
