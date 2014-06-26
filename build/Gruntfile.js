@@ -3,6 +3,12 @@
 
 module.exports = function(grunt) {
 	
+	/**
+	 * Function-level strict mode syntax.
+	 *
+	 * @see rgne.ws/XcZgn8
+	 */
+	
 	'use strict';
 	
 	grunt.initConfig({
@@ -43,6 +49,32 @@ module.exports = function(grunt) {
 			
 		},
 		
+		/*----------------------------------( WATCH )----------------------------------*/
+		
+		/**
+		 * Run predefined tasks whenever watched file patterns are added, changed
+		 * or deleted.
+		 *
+		 * @see https://github.com/gruntjs/grunt-contrib-watch
+		 */
+		
+		watch : {
+			
+			tmpl : {
+				
+				files : [
+					
+					'./source/jquery.<%= pkg.name %>.js',
+					'../demo/**/*',
+					
+				],
+				
+				tasks : ['default'],
+				
+			},
+			
+		},
+		
 		/*----------------------------------( JSHINT )----------------------------------*/
 		
 		/**
@@ -63,7 +95,7 @@ module.exports = function(grunt) {
 			init: [
 				
 				'./Gruntfile.js',
-				'./src/jquery.<%= pkg.name %>.js',
+				'./source/jquery.<%= pkg.name %>.js',
 				
 			],
 			
@@ -114,7 +146,7 @@ module.exports = function(grunt) {
 				
 				files: {
 					
-					'../<%= pkg.name %>/jquery.<%= pkg.name %>.min.js': ['./src/jquery.<%= pkg.name %>.js'],
+					'../<%= pkg.name %>/jquery.<%= pkg.name %>.min.js': ['./source/jquery.<%= pkg.name %>.js'],
 					
 				},
 				
@@ -140,7 +172,7 @@ module.exports = function(grunt) {
 			
 			dist: {
 				
-				src: ['./src/jquery.<%= pkg.name %>.js'],
+				src: ['./source/jquery.<%= pkg.name %>.js'],
 				dest: '../<%= pkg.name %>/jquery.<%= pkg.name %>.js',
 				
 			},
@@ -150,6 +182,8 @@ module.exports = function(grunt) {
 	});
 	
 	/*----------------------------------( TASKS )----------------------------------*/
+	
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	
