@@ -92,7 +92,7 @@ $('.myList').harmonia({
 	classInit     : 'harmonia-js-enabled',
 	use           : 'before',
 	idSelect      : '#foo',
-	elementTarget : 'before',
+	elementTarget : '#target',
 	onInit        : function(data) { console.log('onInit:', $(this), data); },
 	onAfterInit   : function(data) { console.log('onAfterInit:', $(this), data); },
 	onAddOption   : function(data, return) { console.log('onAddOption:', $(this), data, return); },
@@ -131,7 +131,7 @@ Option | Description | Default
 
 1. All options may be defined statically, before plugin initialzation, using: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
 
-1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#foo" }'`, where `elementTarget` is: `<div id="foo"></div>`.
+1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#target" }'`, where `elementTarget` is: `<div id="foo"></div>`.
 
 1. Nested lists may be used to create `<optgroup>`s.
 
