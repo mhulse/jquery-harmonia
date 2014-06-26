@@ -105,7 +105,7 @@ $('.myList').harmonia({
 Option | Description | Default
 :-- | :-- | :--
 `currentPage` | Select the current page? | `false`
-`defaultOption` | Default option for `<select>`. | `'Choose ...'`
+`optionDefault` | Default option for `<select>`. | `'Choose ...'`
 `openTab` | Open link in new tab? Default is current window. | `false`
 `selectClass` | Class name for `<select>`; class applied to generated `<select>` element(s). | `'harmonia-select'`
 `classInit` | Target menu; class name applied to instantiated element(s). | `'harmonia-js-enabled'`
