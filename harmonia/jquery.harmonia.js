@@ -24,7 +24,7 @@
 
 //----------------------------------
 
-;(function($, window, document, undefined) {
+;(function($, window) {
 	
 	/**
 	 * Function-level strict mode syntax.
@@ -617,7 +617,7 @@
 	 * Get text value of a jQuery object, but not its children.
 	 *
 	 * @private
-	 * @see rgne.ws/Rj0KNX
+	 * @see http://viralpatel.net/blogs/jquery-get-text-element-without-child-element/
 	 * @this { object.jquery } Any jQuery object.
 	 * @return { * } The object's text or an empty string.
 	 */
@@ -638,7 +638,7 @@
 	 * Boilerplate plugin logic.
 	 *
 	 * @constructor
-	 * @see rgne.ws/OvKpPc
+	 * @see http://learn.jquery.com/plugins/
 	 * @type { function }
 	 * @param { string } method String method identifier.
 	 * @return { method } Calls plugin method with supplied params.
@@ -656,18 +656,19 @@
 			
 		} else {
 			
-			$.error('jQuery.' + NS + ' thinks that ' + method + ' doesn\'t exist');
+			$.error('jQuery.%s thinks that %s doesn\'t exist', NS, method);
 			
 		}
 		
 	}; // $.fn[NS]
 	
-	//----------------------------------
+	//--------------------------------------------------------------------
 	
 	/**
 	 * Public defaults.
 	 *
-	 * Example:
+	 * Example (before instantiation):
+	 *
 	 * $.fn.harmonia.defaults.idSelect = 'foo';
 	 *
 	 * @see http://stackoverflow.com/questions/11306375/plugin-authoring-how-to-allow-myplugin-defaults-key-value
@@ -677,4 +678,4 @@
 	
 	$.fn[NS].defaults = defaults;
 	
-}(jQuery, window, document));
+}(jQuery, window));
