@@ -113,8 +113,8 @@
 				//----------------------------------
 				
 				var $this = $(this),        // Target object.
-				    data  = $this.data(NS), // Namespace instance data.
-				    settings;               // Settings object.
+					data  = $this.data(NS), // Namespace instance data.
+					settings;               // Settings object.
 				
 				//----------------------------------
 				// Data?
@@ -138,6 +138,7 @@
 						settings : settings,
 						target   : $this,
 						matched  : false,
+						lis      : $this.find('> li'),
 						hrefs    : $this.find('> li > a'),
 						select   : $('<select>', { 'class' : settings.classSelect }),
 						element  : ((settings.elementId) ? $(settings.elementId) : ''),
@@ -202,7 +203,7 @@
 				//----------------------------------
 				
 				var $this = $(this),
-				    data  = $this.data(NS);
+					data  = $this.data(NS);
 				
 				//----------------------------------
 				// Data?
@@ -323,10 +324,10 @@
 				if (data.settings.optionDefault) {
 					
 					//----------------------------------
-					// Get the `<option>`:
+					// Get/create the `<option>`:
 					//----------------------------------
 					
-					$default = _optionize.call(data.target, $('<a />'), data.settings.optionDefault);
+					$default = _optionize.call(data.target, $('<a>'), data.settings.optionDefault);
 					
 					//----------------------------------
 					// Append `<option>` to `<select>`:
@@ -344,21 +345,95 @@
 				// Create the other `<option>`s:
 				//----------------------------------
 				
-				data.hrefs.each(function() {
+				data.lis.each(function() { // http://css-tricks.com/examples/ConvertMenuToDropdown/optgroup.php
 					
 					//----------------------------------
 					// Declare, hoist and initialize:
 					//----------------------------------
 					
-					var $option = _optionize.call(data.target, $(this)); // Get the `<option>`.
+					var $this = $(this),
+					    $children,
+					    $group,
+					    $option;
 					
 					//----------------------------------
-					// Append `<option>` to `<select>`:
+					// Child list to `<optgroup>`?
 					//----------------------------------
 					
-					if ($option.length) {
+					if ($this.find('ul').length) { // @TODO: What about `<ol>`s?
 						
-						$option.appendTo(data.select);
+						//----------------------------------
+						// Find all child list items:
+						//----------------------------------
+						
+						$children = $this.find('li');
+						
+						//----------------------------------
+						// Do we have children list items?
+						//----------------------------------
+						
+						if ($children.length) {
+							
+							//----------------------------------
+							// Append `<optgroup>`:
+							//----------------------------------
+							
+							$group = $('<optgroup>', {
+								// Get the first child (should be element like `<a>` or `<span>`):
+								'label': $this.children(':first').text() // @TODO: Disabled optgroups?
+							}).appendTo(data.select);
+							
+							//----------------------------------
+							// Append `<optgroup>` `<option>`s:
+							//----------------------------------
+							
+							$children.each(function() {
+								
+								//----------------------------------
+								// Get/create the `<option>`:
+								//----------------------------------
+								
+								$option = _optionize.call(data.target, $(this).find('> a'));
+								
+								//----------------------------------
+								// Do we have an `<option>`?
+								//----------------------------------
+								
+								if ($option.length) {
+									
+									//----------------------------------
+									// Append `<option>` to `<select>`:
+									//----------------------------------
+									
+									$option.appendTo($group);
+									
+								}
+								
+							});
+							
+						}
+						
+					} else {
+						
+						//----------------------------------
+						// Get/create the `<option>`:
+						//----------------------------------
+						
+						$option = _optionize.call(data.target, $this.find('> a'));
+						
+						//----------------------------------
+						// Do we have an `<option>`?
+						//----------------------------------
+						
+						if ($option.length) {
+							
+							//----------------------------------
+							// Append `<option>` to `<select>`:
+							//----------------------------------
+							
+							$option.appendTo(data.select);
+							
+						}
 						
 					}
 					
@@ -375,7 +450,7 @@
 					//----------------------------------
 					
 					var $this = $(this),
-					    val;
+						val;
 					
 					//----------------------------------
 					// Callback:
@@ -457,7 +532,7 @@
 				// Problemos:
 				//----------------------------------
 				
-				console.warn('jQuery.%s there\'s a problem with your markup', NS);
+				console.warn('jQuery.%s there\'s a problem with your markup.', NS);
 				
 			}
 			
@@ -485,12 +560,12 @@
 		//----------------------------------
 		
 		var $return = '',
-		    data    = this.data(NS),
-		    $option,
-		    selected,
-		    link,
-		    href,
-		    ahref;
+			data    = this.data(NS),
+			$option,
+			selected,
+			link,
+			href,
+			ahref;
 		
 		//----------------------------------
 		// Data?
@@ -514,7 +589,7 @@
 				// Initialize:
 				//----------------------------------
 				
-				$option  = $('<option />'); // Create `<option>` element.
+				$option  = $('<option>'); // Create `<option>` element.
 				selected = false;
 				link     = ($a.attr('href') || ''); // Current `<a>`'s href.
 				
@@ -601,7 +676,7 @@
 				// Oopsies:
 				//----------------------------------
 				
-				console.warn('jQuery.' + NS, 'thinks there\'s no text for', this);
+				console.warn('jQuery.%s thinks there\'s no text for %o.', NS, this);
 				
 			}
 			
