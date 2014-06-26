@@ -53,7 +53,9 @@ Setting up Harmonia is simple …
 
 ### Styling:
 
-No styling is required, but you can optionally use CSS media queries to show/hide the HTML list/form select(s) as necessary.
+There are no CSS requirements.
+
+Optionally, depending on your needs, [CSS media queries can be used](https://raw.githubusercontent.com/mhulse/jquery-harmonia/gh-pages/demo/demo.css) to show/hide the HTML list/form select(s) based on viewport size.
 
 ### Javascript:
 
