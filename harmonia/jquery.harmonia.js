@@ -75,8 +75,11 @@
 		openTab       : false,              // Open link in new tab? Default is current window.
 		classSelect   : NS + '-select',     // Class name for `<select>`; class applied to generated `<select>` element(s).
 		classInit     : NS + '-js-enabled', // Target menu; class name applied to instantiated element(s).
-		idSelect      : '',                 // ID name for `<select>`; default is no ID.
-		target        : '',                 // Target location for `<select>`; default is before instantiated target element.
+		use           : '',                 // Replacement function to use when adding `<select>` to the DOM. Allowed values are `after`, `append`, `before` (default), `html`, and `prepend`.
+		
+		// Best if set via `data-` attribute options object:
+		idSelect  : '', // ID name for `<select>`; default is no ID.
+		elementId : '', // Target element ID for `<select>`; default is before instantiated target element.
 		
 		// Callbacks:
 		
@@ -85,7 +88,7 @@
 		onAddOption : $.noop, // Called when a new option has been added.
 		onChange    : $.noop  // Called when `<select>` changes.
 		
-	}, // defaults.external
+	}, // defaults
 	
 	//--------------------------------------------------------------------------
 	//
@@ -149,7 +152,9 @@
 						target   : $this,
 						matched  : false,
 						hrefs    : $this.find('> li > a'),
-						select   : $('<select>', { 'class' : settings.classSelect })
+						select   : $('<select>', { 'class' : settings.classSelect }),
+						element  : ((settings.elementId) ? $(settings.elementId) : ''),
+						use      : ((settings.use && (/^(?:after|append|before|html|prepend|text)$/).test(settings.use)) ? settings.use : 'before') // If input is valid method name, use that; otherwise, default to `before` method.
 						
 					});
 					
@@ -427,19 +432,37 @@
 						
 					}
 					
-				})
+				});
 				
 				//----------------------------------
-				// Insert before target:
+				// Target element?
 				//----------------------------------
 				
-				.insertBefore(data.target);
+				if (data.element.length) {
+					
+					//----------------------------------
+					// Insert using target el:
+					//----------------------------------
+					
+					data.element[data.use](data.select);
+					
+				} else {
+					
+					//----------------------------------
+					// Insert using instantiated el:
+					//----------------------------------
+					
+					data.target[data.use](data.select);
+					
+				}
 				
 				//----------------------------------
 				// Callback:
 				//----------------------------------
 				
 				data.settings.onAfterInit.call(data.target);
+				
+				// Done!
 				
 			} else {
 				
