@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 1.1.0
- * @date 2014/06/26
+ * @date 2014/06/27
  */
 
 //----------------------------------
@@ -346,11 +346,7 @@
 					// Append `<option>` to `<select>`:
 					//----------------------------------
 					
-					if ($default.length) {
-						
-						$default.appendTo(data.select);
-						
-					}
+					$default.appendTo(data.select);
 					
 				}
 				
@@ -607,26 +603,26 @@
 				link     = ($a.attr('href') || ''); // Current `<a>`'s href.
 				
 				//----------------------------------
-				// Something currently selected?
+				// Avoid junk:
 				//----------------------------------
 				
-				if ( ! data.matched) {
+				if (link && (link != '#')) { // @TODO Better checking here?
 					
 					//----------------------------------
-					// Force select via class?
+					// Something currently selected?
 					//----------------------------------
 					
-					if ($a.attr('class') == 'selected') {
-						
-						selected = true; // Yup. Force selected.
-						
-					} else if (data.settings.currentPage) {
+					if ( ! data.matched) {
 						
 						//----------------------------------
-						// Ignore hashes and compare URLs:
+						// Force select via class?
 						//----------------------------------
 						
-						if (link != '#') {
+						if ($a.hasClass('selected')) {
+							
+							selected = true; // Yup. Force selected.
+							
+						} else if (data.settings.currentPage) {
 							
 							//----------------------------------
 							// Get hrefs:
@@ -636,10 +632,11 @@
 							ahref = link.toLowerCase();
 							
 							//----------------------------------
-							// Compare directly or indexOf():
+							// Compare urls directly or index:
 							//----------------------------------
 							
-							if ((href == ahref) || (href.indexOf(ahref) != -1)) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+							// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+							if ((href == ahref) || (href.indexOf(ahref) != -1)) {
 								
 								selected = true;
 								
@@ -647,35 +644,35 @@
 							
 						}
 						
+						//----------------------------------
+						// Selected!!!!!!!!!!!!!!!!!!!!!!!!!
+						//----------------------------------
+						
+						if (selected) {
+							
+							//----------------------------------
+							// Set selected attribute:
+							//----------------------------------
+							
+							$option.attr('selected', 'selected'); // Pheeeew. :D
+							
+							//----------------------------------
+							// Set flag and stop checking:
+							//----------------------------------
+							
+							data.matched = true; // Flippin' switches!
+							
+						}
+						
 					}
 					
 					//----------------------------------
-					// Selected!!!!!!!!!!!!!!!!!!!!!!!!!
+					// Location value:
 					//----------------------------------
 					
-					if (selected) {
-						
-						//----------------------------------
-						// Set selected attribute:
-						//----------------------------------
-						
-						$option.attr('selected', 'selected'); // Pheeeew. :D
-						
-						//----------------------------------
-						// Set flag and stop checking:
-						//----------------------------------
-						
-						data.matched = true; // Flippin' switches!
-						
-					}
+					$option.attr('value', link);
 					
 				}
-				
-				//----------------------------------
-				// Location value:
-				//----------------------------------
-				
-				$option.attr('value', link);
 				
 				//----------------------------------
 				// Assign text to `<option>`:

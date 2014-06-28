@@ -1,8 +1,20 @@
-.js .myList { display: none; visibility: hidden; }
+select { font-size: 16px; }
+
+.js .myList {
+	display: none;
+	visibility: hidden;
+}
 
 @media only screen and (min-width: 1000px) {
 	
-	.harmonia-select, #yolo { display: none; visibility: hidden; }
-	.js .myList { display: block; visibility: visible; }
+	.harmonia-select, #yolo {
+		display: none;
+		visibility: hidden;
+	}
+	
+	.js .myList {
+		display: block;
+		visibility: visible;
+	}
 	
 }

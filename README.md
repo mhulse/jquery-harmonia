@@ -163,6 +163,8 @@ Option | Description | Default
  </select>
  ```
 
+1. A `<li>` item’s `<a>`, with `class="selected"`, will apply a `selected="selected"` attribute to the generated `<option>`. Note that a `selected` class will trump the `currentPage` option.
+
 [Check out the demo page](http://mhulse.github.com/jquery-harmonia/demo/) for working examples of the aforementioned features.
 
 ## Contributing

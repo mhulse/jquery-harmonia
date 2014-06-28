@@ -29,24 +29,22 @@
 		<li><a href="http://en.wikipedia.org/wiki/Erinyes">Erinyes</a></li>
 		<li><a class="selected" href="http://en.wikipedia.org/wiki/Cronus">Cronus</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Ceto">Ceto</a></li>
+		<li><a href="http://mky.io/jquery-harmonia/demo/">Current page (absolute)</a></li>
+		<!--<li><a href="/jquery-harmonia/demo/">IBID (root relative)</a></li>-->
+		<li><a href="/jquery-harmonia/demo/?foo=bar">IBID (query string)</a></li>
+		<li><a href="index.html">IBID (relative)</a></li>
+		<!--<li><a href="index.html?foo=bar">IBID (query string)</a></li>-->
 	</ul>
-	
-	<hr>
 	
 	<ul class="myList toDestroy" data-harmonia-options='{ "classSelect" : "omgWtf", "idSelect" : "yolo", "elementTarget" : "#target", "use" : "after" }'>
 		<li><a href="http://en.wikipedia.org/wiki/Phorcys">Phorcys</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Triton_(mythology)">Triton</a></li>
 		<li><a href="http://en.wikipedia.org/wiki/Ouranos">Ouranos</a></li>
-		<li><a href="http://registerguard.github.com/jquery-harmonia/demo/">Current page (absolute)</a></li>
-		<!--<li><a href="/jquery-harmonia/demo/">IBID (root relative)</a></li>-->
-		<li><a href="/jquery-harmonia/demo/?foo=bar">IBID (query string)</a></li>
-		<li><a href="index.html">IBID (relative)</a></li>
-		<!--<li><a href="index.html?foo=bar">IBID (query string)</a></li>-->
 		<li>
-			<a href="#">Testing optgroups</a>
+			<a href="#">Personified concepts</a>
 			<ul>
-				<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup">Sub 1</a></il>
-				<li><a href="http://www.w3.org/wiki/HTML/Elements/optgroup">Sub 2</a></il>
+				<li><a href="http://en.wikipedia.org/wiki/Achlys">Achlys</a></il>
+				<li><a href="http://en.wikipedia.org/wiki/Zelus">Zelus</a></il>
 			</ul>
 		</li>
 	</ul>
@@ -64,10 +62,10 @@
 			$('.myList').harmonia({
 				//openTab     : true,
 				currentPage : true,
-				onInit        : function(data) { console.log('onInit:', $(this), data); },
-				onAfterInit   : function(data) { console.log('onAfterInit:', $(this), data); },
-				onAddOption   : function(data, ret) { console.log('onAddOption:', $(this), data, ret); },
-				onChange      : function(data, el) { console.log('onChange:', $(this), el); }
+				//onInit        : function(data) { console.log('onInit:', $(this), data); },
+				//onAfterInit   : function(data) { console.log('onAfterInit:', $(this), data); },
+				//onAddOption   : function(data, ret) { console.log('onAddOption:', $(this), data, ret); },
+				//onChange      : function(data, el) { console.log('onChange:', $(this), el); }
 			});
 			//$('.toDestroy').harmonia('destroy');
 			
