@@ -139,7 +139,7 @@ Option | Description | Default
 
  ```html
  <ul class="myList">
- 	<li><a href="http://en.wikipedia.org/wiki/Phorcys">Phorcys</a></li>
+ 	<li><a href="https://www.google.com">Phorcys</a></li>
  	<li>
  		<a href="#">Testing optgroups</a>
  		<ul>
@@ -155,10 +155,10 @@ Option | Description | Default
  ```html
  <select class="myList">
  	<option selected="selected" value="">Choose ...</option>
- 	<option value="http://en.wikipedia.org/wiki/Phorcys">Phorcys</option>
+ 	<option value="https://www.google.com">Phorcys</option>
  	<optgroup label="Testing optgroups">
- 		<option value="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup">Sub 1</option>
- 		<option value="http://www.w3.org/wiki/HTML/Elements/optgroup">Sub 2</option>
+ 		<option value="https://www.google.com">Sub 1</option>
+ 		<option value="https://www.google.com">Sub 2</option>
  	</optgroup>
  </select>
  ```
