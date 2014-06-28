@@ -129,7 +129,7 @@ Option | Description | Default
 
  **Note** the nesting order of the single (`'`) and double (`"`) quotes.
 
-1. All options may be defined statically, before plugin initialzation, using: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
+1. All options may be defined before plugin initialzation, like: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
 
 1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#foo" }'`, where `elementTarget` is: `<div id="foo"></div>` somewhere on page.
 
