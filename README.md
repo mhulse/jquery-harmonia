@@ -154,7 +154,7 @@ Option | Description | Default
 
  ```html
  <select class="myList">
- 	<option selected="selected" value="">Choose ...</option>
+ 	<option>Choose ...</option>
  	<option value="https://www.google.com">Top</option>
  	<optgroup label="Subs">
  		<option value="https://www.google.com">Sub 1</option>
