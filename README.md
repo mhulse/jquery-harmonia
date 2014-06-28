@@ -131,7 +131,7 @@ Option | Description | Default
 
 1. All options may be defined statically, before plugin initialzation, using: `$.fn.harmonia.defaults.XXX = 'foo';` (where `XXX` is name of option).
 
-1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#target" }'`, where `elementTarget` is: `<div id="foo"></div>`.
+1. Move the generated `<select>` anywhere on the page using the `elementTarget` option. For example: `data-harmonia-options='{ "elementTarget" : "#foo" }'`, where `elementTarget` is: `<div id="foo"></div>` somewhere on page.
 
 1. Nested lists may be used to create `<optgroup>`s.
 
