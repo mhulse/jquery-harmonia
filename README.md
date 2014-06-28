@@ -139,9 +139,9 @@ Option | Description | Default
 
  ```html
  <ul class="myList">
- 	<li><a href="https://www.google.com">Phorcys</a></li>
+ 	<li><a href="https://www.google.com">Top</a></li>
  	<li>
- 		<a href="#">Testing optgroups</a>
+ 		<a href="#">Subs</a>
  		<ul>
  			<li><a href="https://www.google.com">Sub 1</a></il>
  			<li><a href="https://www.google.com">Sub 2</a></il>
@@ -155,8 +155,8 @@ Option | Description | Default
  ```html
  <select class="myList">
  	<option selected="selected" value="">Choose ...</option>
- 	<option value="https://www.google.com">Phorcys</option>
- 	<optgroup label="Testing optgroups">
+ 	<option value="https://www.google.com">Top</option>
+ 	<optgroup label="Subs">
  		<option value="https://www.google.com">Sub 1</option>
  		<option value="https://www.google.com">Sub 2</option>
  	</optgroup>
