@@ -28,7 +28,7 @@
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * Javascript console.
+	 * Javascript console detection protection.
 	 *
 	 * @see http://www.paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
 	 */
@@ -69,7 +69,6 @@
 		elementTarget : '', // Desired location to put the `<select>`; defaults to `before` (see `use` option) the current instantiated element.
 		
 		// Callbacks:
-		
 		onInit      : $.noop, // Callback after plugin data initialized.
 		onAfterInit : $.noop, // Callback after plugin initialization.
 		onAddOption : $.noop, // Callback when a new option has been added.
@@ -112,9 +111,9 @@
 				// Declare, hoist and initialize:
 				//----------------------------------
 				
-				var $this = $(this),        // Target object.
-					data  = $this.data(NS), // Namespace instance data.
-					settings;               // Settings object.
+				var $this = $(this),       // Target object.
+				    data = $this.data(NS), // Namespace instance data.
+				    settings;              // Settings object.
 				
 				//----------------------------------
 				// Data?
@@ -138,8 +137,7 @@
 						settings : settings,
 						target   : $this,
 						matched  : false,
-						lis      : $this.find('> li'),
-						hrefs    : $this.find('> li > a'),
+						lis      : $this.children('li'),
 						select   : $('<select>', { 'class' : settings.classSelect }),
 						element  : ((settings.elementTarget) ? $(settings.elementTarget) : ''),
 						use      : ((settings.use && (/^(?:after|append|before|html|prepend|text)$/).test(settings.use)) ? settings.use : 'before') // If input is valid method name, use that; otherwise, default to `before` method.
@@ -203,7 +201,7 @@
 				//----------------------------------
 				
 				var $this = $(this),
-					data  = $this.data(NS);
+				    data = $this.data(NS); // Get instance data.
 				
 				//----------------------------------
 				// Data?
@@ -295,7 +293,7 @@
 			// Check for object(s):
 			//----------------------------------
 			
-			if (data.hrefs.length) {
+			if (data.lis.length) {
 				
 				//----------------------------------
 				// Root menu CSS class:
@@ -348,27 +346,27 @@
 					//----------------------------------
 					
 					var $this = $(this),
-					    $children,
-					    $group,
-					    $option;
+					    $children = $this.children(), // Get immediate children.
+					    $lists,
+					    $group;
 					
 					//----------------------------------
 					// Child list to `<optgroup>`?
 					//----------------------------------
 					
-					if ($this.find('ul').length) { // @TODO: What about `<ol>`s?
+					if ($children.filter('ul, ol').length) { // Allow for `<ul>` and `<ol>`.
 						
 						//----------------------------------
-						// Find all child list items:
+						// Find all child `<li>` items:
 						//----------------------------------
 						
-						$children = $this.find('li');
+						$lists = $children.find('li');
 						
 						//----------------------------------
-						// Do we have children list items?
+						// Do we have children `<li>` items?
 						//----------------------------------
 						
-						if ($children.length) {
+						if ($lists.length) {
 							
 							//----------------------------------
 							// Append `<optgroup>`:
@@ -376,34 +374,20 @@
 							
 							$group = $('<optgroup>', {
 								// Get the first child (should be element like `<a>` or `<span>`):
-								'label': $this.children(':first').text() // @TODO: Disabled optgroups?
+								'label': $children.first().text() // @TODO: Disabled optgroups?
 							}).appendTo(data.select);
 							
 							//----------------------------------
 							// Append `<optgroup>` `<option>`s:
 							//----------------------------------
 							
-							$children.each(function() {
+							$lists.each(function() {
 								
 								//----------------------------------
-								// Get/create the `<option>`:
+								// Convert `<a>` to `<option>`:
 								//----------------------------------
 								
-								$option = _optionize.call(data.target, $(this).find('> a'));
-								
-								//----------------------------------
-								// Do we have an `<option>`?
-								//----------------------------------
-								
-								if ($option.length) {
-									
-									//----------------------------------
-									// Append `<option>` to `<select>`:
-									//----------------------------------
-									
-									$option.appendTo($group);
-									
-								}
+								_appendize.call(data.target, $(this), $group);
 								
 							});
 							
@@ -412,24 +396,10 @@
 					} else {
 						
 						//----------------------------------
-						// Get/create the `<option>`:
+						// Convert `<a>` to `<option>`:
 						//----------------------------------
 						
-						$option = _optionize.call(data.target, $this.find('> a'));
-						
-						//----------------------------------
-						// Do we have an `<option>`?
-						//----------------------------------
-						
-						if ($option.length) {
-							
-							//----------------------------------
-							// Append `<option>` to `<select>`:
-							//----------------------------------
-							
-							$option.appendTo(data.select);
-							
-						}
+						_appendize.call(data.target, $this, data.select);
 						
 					}
 					
@@ -439,58 +409,7 @@
 				// Add change event to `<select>`:
 				//----------------------------------
 				
-				data.select.change(function() {
-					
-					//----------------------------------
-					// Declare, hoist and initialize:
-					//----------------------------------
-					
-					var $this = $(this),
-						val;
-					
-					//----------------------------------
-					// Callback:
-					//----------------------------------
-					
-					data.settings.onChange.call(data.target, data, $this); // @TODO: Is this the best spot for this?
-					
-					//----------------------------------
-					// Get link value:
-					//----------------------------------
-					
-					val = $this.val();
-					
-					//----------------------------------
-					// Follow link value?
-					//----------------------------------
-					
-					if (val && (val !== '#')) { // @TODO: Improve link validation?
-						
-						//----------------------------------
-						// Ignore default `<select>`:
-						//----------------------------------
-						
-						if (val !== data.settings.optionDefault) {
-							
-							//----------------------------------
-							// Open tab or use current window:
-							//----------------------------------
-							
-							if (data.settings.openTab) {
-								
-								window.open(val); // New tab.
-								
-							} else {
-								
-								window.location = val; // Current window.
-								
-							}
-							
-						}
-						
-					}
-					
-				});
+				_changeize.call(data.target);
 				
 				//----------------------------------
 				// Target element?
@@ -540,11 +459,73 @@
 	//----------------------------------
 	
 	/**
+	 * Converts `<a>` to `<option>` and appends to passed element.
+	 *
+	 * @private
+	 * @type { function }
+	 * @this { object.jquery } The base target object.
+	 * @param { object.jquery } $li List item.
+	 * @param { object.jquery } $to Element to append list item to.
+	 * @return void
+	 */
+	
+	_appendize = function($li, $to) {
+		
+		//----------------------------------
+		// Declare, hoist and initialize:
+		//----------------------------------
+		
+		var data = this.data(NS), // Get instance data.
+		    $a = $li.children('a'), // Find child `<a>` item.
+		    $option;
+		
+		//----------------------------------
+		// Do we have children `<a>` items?
+		//----------------------------------
+		
+		if ($a.length) {
+			
+			//----------------------------------
+			// Get/create the `<option>`:
+			//----------------------------------
+			
+			$option = _optionize.call(data.target, $a);
+			
+			//----------------------------------
+			// Do we have an `<option>`?
+			//----------------------------------
+			
+			if ($option.length) {
+				
+				//----------------------------------
+				// Append `<option>` to `<select>`:
+				//----------------------------------
+				
+				$option.appendTo($to);
+				
+			}
+			
+		} else {
+			
+			//----------------------------------
+			// Doh!
+			//----------------------------------
+			
+			console.warn('jQuery.%s can\'t find child hrefs for %o\'s %o.', NS, this, $li);
+			
+		}
+		
+	}, // _appendize
+	
+	//----------------------------------
+	
+	/**
 	 * Create options for the `<select>` menu.
 	 *
 	 * @private
+	 * @type { function }
 	 * @this { object.jquery } The base target object.
-	 * @param { object.jquery } The `<a>` to convert a `<select>`.
+	 * @param { object.jquery } $a The `<a>` to convert a `<select>`.
 	 * @param { string } text Optional text for `<option>`.
 	 * @return { * } The `<select>` `<option>` or an empty string.
 	 */
@@ -556,12 +537,12 @@
 		//----------------------------------
 		
 		var $return = '',
-			data    = this.data(NS),
-			$option,
-			selected,
-			link,
-			href,
-			ahref;
+		    data = this.data(NS), // Get instance data.
+		    $option,
+		    selected,
+		    link,
+		    href,
+		    ahref;
 		
 		//----------------------------------
 		// Data?
@@ -698,8 +679,10 @@
 	/**
 	 * Get text value of a jQuery object, but not its children.
 	 *
-	 * @private
 	 * @see http://viralpatel.net/blogs/jquery-get-text-element-without-child-element/
+	 *
+	 * @private
+	 * @type { function }
 	 * @this { object.jquery } Any jQuery object.
 	 * @return { * } The object's text or an empty string.
 	 */
@@ -708,7 +691,85 @@
 		
 		return (this.length) ? this.clone().children().remove().end().text() : '';
 		
-	}; // _textualize
+	}, // _textualize
+	
+	//----------------------------------
+	
+	/**
+	 * Bind "change" event handler to `<select>`.
+	 *
+	 * @private
+	 * @type { function }
+	 * @this { object.jquery } Any jQuery object.
+	 * @return void
+	 */
+	
+	_changeize = function() {
+		
+		//----------------------------------
+		// Declare, hoist and initialize:
+		//----------------------------------
+		
+		var data = this.data(NS);
+		
+		//----------------------------------
+		// Bind "change" event handler:
+		//----------------------------------
+		
+		data.select.change(function() {
+			
+			//----------------------------------
+			// Declare, hoist and initialize:
+			//----------------------------------
+			
+			var $this = $(this),
+			    val;
+			
+			//----------------------------------
+			// Callback:
+			//----------------------------------
+			
+			data.settings.onChange.call(data.target, data, $this); // @TODO: Is this the best spot for this?
+			
+			//----------------------------------
+			// Get link value:
+			//----------------------------------
+			
+			val = $this.val();
+			
+			//----------------------------------
+			// Follow link value?
+			//----------------------------------
+			
+			if (val && (val !== '#')) { // @TODO: Improve link validation?
+				
+				//----------------------------------
+				// Ignore default `<select>`:
+				//----------------------------------
+				
+				if (val !== data.settings.optionDefault) {
+					
+					//----------------------------------
+					// Open tab or use current window:
+					//----------------------------------
+					
+					if (data.settings.openTab) {
+						
+						window.open(val); // New tab.
+						
+					} else {
+						
+						window.location = val; // Current window.
+						
+					}
+					
+				}
+				
+			}
+			
+		});
+		
+	}; // _changeize
 	
 	//--------------------------------------------------------------------------
 	//
@@ -719,8 +780,9 @@
 	/**
 	 * Boilerplate plugin logic.
 	 *
-	 * @constructor
 	 * @see http://learn.jquery.com/plugins/
+	 *
+	 * @constructor
 	 * @type { function }
 	 * @param { string } method String method identifier.
 	 * @return { method } Calls plugin method with supplied params.
