@@ -7,7 +7,7 @@
  * @docs https://github.com/mhulse/jquery-harmonia
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
- * @version 1.1.0
+ * @version 1.1.1
  * @date 2014/07/20
  */
 
