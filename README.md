@@ -177,11 +177,13 @@ Please read the [CONTRIBUTING.md](https://github.com/mhulse/jquery-harmonia/blob
 
 ## Changelog
 
+* [v1.1.1 milestones](https://github.com/mhulse/jquery-harmonia/issues?direction=desc&milestone=3&page=1&sort=updated&state=closed)
 * [v1.1.0 milestones](https://github.com/mhulse/jquery-harmonia/issues?direction=desc&milestone=2&page=1&sort=updated&state=closed)
 * [v1.0.0 milestones](https://github.com/mhulse/jquery-harmonia/issues?direction=asc&milestone=1&page=1&sort=updated&state=closed)
 
 ## [Release history](https://github.com/mhulse/jquery-harmonia/releases)
 
+* 2014-07-20   [v1.1.1](https://github.com/mhulse/jquery-harmonia/releases/tag/v1.1.1)   Versatile.
 * 2014-06-26   [v1.1.0](https://github.com/mhulse/jquery-harmonia/releases/tag/v1.1.0)   Über!
 * 2014-04-14   [v1.0.0](https://github.com/mhulse/jquery-harmonia/releases/tag/v1.0.0)   Stable.
 * 2012-08-05   [v0.1.0](https://github.com/mhulse/jquery-harmonia/releases/tag/v0.1.0)
