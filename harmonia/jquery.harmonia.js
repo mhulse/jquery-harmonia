@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2014 Micky Hulse.
  * @license Released under the Apache License, Version 2.0.
  * @version 1.1.0
- * @date 2014/06/27
+ * @date 2014/07/20
  */
 
 //----------------------------------
@@ -541,7 +541,7 @@
 				// Problemos:
 				//----------------------------------
 				
-				console.warn('jQuery.%s there\'s a problem with your markup.', NS);
+				console.warn('jQuery.%s thinks there\'s a problem with your markup.', NS);
 				
 			}
 			

@@ -528,7 +528,7 @@
 				// Problemos:
 				//----------------------------------
 				
-				console.warn('jQuery.%s there\'s a problem with your markup.', NS);
+				console.warn('jQuery.%s thinks there\'s a problem with your markup.', NS);
 				
 			}
 			
