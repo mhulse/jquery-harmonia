@@ -143,8 +143,8 @@ Option | Description | Default
  	<li>
  		<a href="#">Subs</a>
  		<ul>
- 			<li><a href="https://www.google.com">Sub 1</a></il>
- 			<li><a href="https://www.google.com">Sub 2</a></il>
+ 			<li><a href="https://www.google.com">Sub 1</a></li>
+ 			<li><a href="https://www.google.com">Sub 2</a></li>
  		</ul>
  	</li>
  </ul>
